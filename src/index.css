@@ -9,3 +9,18 @@
     margin: 0;
     font-family: "Poppins", sans-serif;
 }
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #635AD9;
+    border-radius: 10px;
+    border: 1px solid transparent;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
