@@ -1,12 +1,12 @@
-import { Button } from "antd";
-import { useLocation, useNavigate } from "react-router-dom";
+import {Button} from "antd";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import '../i18n/i18n.ts';
 
 export function Header() {
     const url = useLocation();
-    const { t } = useTranslation();
-    const {i18n}= useTranslation()
+    const {t} = useTranslation();
+    const {i18n} = useTranslation()
     const navigate = useNavigate();
 
     function removeLanguageSegment(path: string) {
@@ -21,17 +21,18 @@ export function Header() {
         const newPath = removeLanguageSegment(url.pathname);
         i18n.changeLanguage(newLang as string).then();
         navigate(`/${newLang}${newPath}`);
+        console.log(i18n.language)
     }
 
     const language = [
-        { lable: "UZ" ,  value: "uz" },
-        { lable: "RU" ,  value: "ru" }
+        {lable: "UZ", value: "uz"},
+        {lable: "RU", value: "ru"}
     ];
 
     return (
         <div className="flex items-center justify-between min-w-[100%] px-[10px] py-[15px]">
             <div className="flex items-center gap-[20px]">
-                <img src="/logo.svg" alt="Ishonch Logo" />
+                <img src="/logo.svg" alt="Ishonch Logo"/>
             </div>
 
             <div className="flex items-center gap-[20px] mr-[80px]">
