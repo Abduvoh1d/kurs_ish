@@ -44,7 +44,7 @@ export function Header() {
                     {language.map((item, index) => (
                         <Button
                             key={index}
-                            className={`rounded-3xl ${i18n.language == item.value ? "bg-gray-400 hover:!bg-gray-400 !text-white !border-gray-400" : "bg-white !text-black !border-gray-400"}`}
+                            className={`rounded-3xl ${i18n.language == item.value ? "bg-gray-900 hover:!bg-gray-900 !text-white !border-gray-900" : "bg-white !text-black !border-gray-900"}`}
                             onClick={() => changeLanguage(item.value)}
                         >
                             {item.lable}

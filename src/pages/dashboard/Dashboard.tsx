@@ -3,104 +3,104 @@ import {FaRegUser} from "react-icons/fa";
 
 export function Dashboard() {
     return (
-        <div className={'bg-[#F9F9F9] h-[85vh] px-[30px] pt-[50px] overflow-auto'}>
+        <div className={'bg-[#F9F9F9] h-[85vh] px-[30px] py-7 overflow-auto'}>
             <Row className={'gap-8'}>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] py-[10px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 font-[Poppins] text-white flex flex-col justify-between items-center h-[170px] py-[10px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px] w-[90px]'}>Joriy oyda to’laganlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>
                 </Col>
-                <Col span={4} className={'bg-[#635AD9] text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
+                <Col span={4} className={'bg-blue-600 text-white flex flex-col justify-between items-center h-[170px] pt-[15px] pb-[20px] rounded-[12px]'}>
                     <FaRegUser className={'text-4xl'}/>
                     <p className={'text-[40px]'}>56</p>
                     <p className={'text-[16px]'}>Hodimlar</p>

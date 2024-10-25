@@ -2,6 +2,8 @@ import {
     Checkbox, CheckboxOptionType, Col, ColorPicker, DatePicker, Form, FormInstance, Input,
     InputNumber, Radio, Row, Select, SelectProps, TimePicker, Upload
 } from "antd";
+import {useTranslation} from "react-i18next";
+import i18n from "i18next";
 
 export interface IForm {
     xs?: number;
@@ -47,9 +49,9 @@ export function AutoForm({
                              form,
                              className,
                              initialValues,
-                             onFinish,
+                             onFinish
                          }: AutoFormProps) {
-
+    const {t} = useTranslation();
     function getInput(props: IForm) {
         const commonProps = {
             className: props.className,
@@ -94,7 +96,7 @@ export function AutoForm({
             case 'url':
                 return <Input type="url" {...commonProps} {...length} />;
             case 'select':
-                return <Select options={props.option} {...commonProps} />;
+                return <Select options={props.option} {...commonProps} size={props.size} />;
             case 'phone':
                 return <Input type="tel" {...commonProps} {...length} />;
             case 'colorPicker':
@@ -131,7 +133,7 @@ export function AutoForm({
                             rules={[
                                 {
                                     required: item.required,
-                                    message: item.message || `Please input ${item.label ?? item.name}!`,
+                                    message: `${i18n.language == 'ru' ? t("Kiriting") : ''} ${(item.message ?? item.label)} ${i18n.language == 'uz' ? t("kiriting") : ''} !`,
                                 },
                             ]}
                         >
