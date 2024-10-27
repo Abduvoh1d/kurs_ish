@@ -149,6 +149,7 @@ export const Xodimlar = () => {
         {key: '1', name: 'Python', day: false},
         {key: '2', name: 'Python'},
         {key: '3', name: 'Python', day: true},
+        {key: '4', name: 'Python', day: false},
     ]
 
     const data = [
