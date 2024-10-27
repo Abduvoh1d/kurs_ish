@@ -65,7 +65,7 @@ export function Sider() {
                 <div>
                     {data.map((item, index) => (
                         <Link to={item.link} key={index}
-                              className={`flex justify-start items-center gap-3 font-[600] px-[20px] py-[15px] ${location.pathname.includes(item.link) ? 'bg-[#635AD9] text-white hover:text-white' : 'hover:text-black'} rounded-xl cursor-pointer`}>
+                              className={`flex justify-start items-center gap-3 font-[600] font-[Source Sans Pro] px-[20px] py-[15px] ${location.pathname.includes(item.link) ? 'bg-[#635AD9] text-white hover:text-white' : 'hover:text-black'} rounded-xl cursor-pointer`}>
                             <span className={'text-[20px]'}>{item.icon}</span>
                             <span className={'!text-[14px]'}>{item.name}</span>
                         </Link>

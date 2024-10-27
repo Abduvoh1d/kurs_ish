@@ -8,7 +8,9 @@ export function Layout() {
             <Sider/>
             <div className={'w-[100%] max-w-[100%]'}>
                 <Header/>
-                <Outlet/>
+                <div>
+                    <Outlet/>
+                </div>
             </div>
         </div>
     );

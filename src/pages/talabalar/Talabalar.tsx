@@ -196,7 +196,7 @@ export function Talabalar() {
     ] as IForm[]
 
     return (
-        <div className="w-full bg-[#F9F9F9] h-[82vh]">
+        <div className="w-full bg-[#F9F9F9] h-[84vh]">
             <div className="flex items-center justify-between mx-10 pt-7">
                 <Typography.Title level={1} className="!font-semibold !mb-2">
                     {t("Talabalar")}

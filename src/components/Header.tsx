@@ -21,7 +21,6 @@ export function Header() {
         const newPath = removeLanguageSegment(url.pathname);
         i18n.changeLanguage(newLang as string).then();
         navigate(`/${newLang}${newPath}`);
-        console.log(i18n.language)
     }
 
     const language = [

@@ -2,7 +2,7 @@ import {
     Checkbox, CheckboxOptionType, Col, ColorPicker, DatePicker, Form, FormInstance, Input,
     InputNumber, Radio, Row, Select, SelectProps, TimePicker, Upload
 } from "antd";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import i18n from "i18next";
 
 export interface IForm {
@@ -28,12 +28,12 @@ export interface IForm {
     size?: 'small' | 'middle' | 'large';
     variant?: 'filled' | 'borderless' | 'outlined';
     type?: 'input' | 'textarea' | 'password' | 'checkbox' | 'email' |
-        'datePicker' | 'number' | 'timePicker' | 'radio' | 'upload' |
+        'datePicker' | 'rangePicker' | 'number' | 'timePicker' | 'radio' | 'upload' |
         'url' | 'select' | 'phone' | 'colorPicker';
 }
 
 export interface AutoFormProps {
-    props?: IForm[];
+    props: IForm[];
     form: FormInstance;
     className?: string;
     gutter?: [number, number];
@@ -51,7 +51,8 @@ export function AutoForm({
                              initialValues,
                              onFinish
                          }: AutoFormProps) {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
+
     function getInput(props: IForm) {
         const commonProps = {
             className: props.className,
@@ -70,29 +71,25 @@ export function AutoForm({
             case 'input':
                 return <Input {...commonProps} {...length} />;
             case 'textarea':
-                return <Input.TextArea {...commonProps} {...length} rows={props.rows}/>;
+                return <Input.TextArea {...commonProps} {...length} rows={props.rows} />;
             case 'password':
                 return <Input.Password {...commonProps} {...length} />;
             case 'checkbox':
-                return (
-                    <Checkbox
-                        className={props.className}
-                    >
-                        {props.label}
-                    </Checkbox>
-                );
+                return <Checkbox className={props.className}>{props.label}</Checkbox>;
             case 'email':
                 return <Input type="email" {...commonProps} {...length} />;
             case 'datePicker':
-                return <DatePicker {...commonProps} size={props.size}/>;
+                return <DatePicker {...commonProps} size={props.size} />;
+            case 'rangePicker':
+                return <DatePicker.RangePicker   size={props.size} />;
             case 'number':
                 return <InputNumber {...commonProps} {...length} />;
             case 'timePicker':
-                return <TimePicker {...commonProps} size={props.size}/>;
+                return <TimePicker {...commonProps} size={props.size} />;
             case 'radio':
                 return <Radio.Group options={props.radioOptions} {...commonProps} />;
             case 'upload':
-                return <Upload multiple={false} maxCount={1}/>;
+                return <Upload multiple={false} maxCount={1} />;
             case 'url':
                 return <Input type="url" {...commonProps} {...length} />;
             case 'select':
@@ -100,9 +97,9 @@ export function AutoForm({
             case 'phone':
                 return <Input type="tel" {...commonProps} {...length} />;
             case 'colorPicker':
-                return <ColorPicker {...commonProps} size={props.size} defaultValue="#395f94"/>;
+                return <ColorPicker {...commonProps} size={props.size} defaultValue="#395f94" />;
             default:
-                return <Input {...commonProps} {...length} size={props.size}/>;
+                return <Input {...commonProps} {...length} size={props.size} />;
         }
     }
 
@@ -129,11 +126,17 @@ export function AutoForm({
                         <Form.Item
                             label={item.type === 'checkbox' ? undefined : item.label}
                             name={item.name}
-                            valuePropName={item.type === 'checkbox' ? 'checked' : 'value'}
+                            valuePropName={
+                                item.type === 'checkbox' ? 'checked' : 'value'
+                            }
                             rules={[
                                 {
                                     required: item.required,
-                                    message: `${i18n.language == 'ru' ? t("Kiriting") : ''} ${(item.message ?? item.label)} ${i18n.language == 'uz' ? t("kiriting") : ''} !`,
+                                    message: `${
+                                        i18n.language === 'ru' ? t('Kiriting') : ''
+                                    } ${item.message ?? item.label} ${
+                                        i18n.language === 'uz' ? t('kiriting') : ''
+                                    } !`,
                                 },
                             ]}
                         >
