@@ -1,15 +1,15 @@
-import {Outlet} from "react-router-dom";
-import {Sider} from "../components/Sider.tsx";
-import {Header} from "../components/Header.tsx";
+import { Outlet } from "react-router-dom";
+import { Sider } from "../components/Sider.tsx";
+import { Header } from "../components/Header.tsx";
 
 export function Layout() {
     return (
-        <div className={'flex'}>
-            <Sider/>
-            <div className={'w-[100%] max-w-[100%]'}>
-                <Header/>
-                <div>
-                    <Outlet/>
+        <div className="flex h-[100vh]">
+            <Sider />
+            <div className="flex flex-col w-full">
+                <Header />
+                <div className="flex-1 overflow-auto">
+                    <Outlet />
                 </div>
             </div>
         </div>

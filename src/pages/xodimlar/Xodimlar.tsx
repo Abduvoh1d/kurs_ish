@@ -8,6 +8,7 @@ import {useLocationParams} from "../../hooks/use-location-params.ts";
 import {HiOutlineDotsVertical} from "react-icons/hi";
 import dayjs from "dayjs";
 import {LuPencil} from "react-icons/lu";
+import {IoIosCheckmark, IoMdClose} from "react-icons/io";
 
 export const Xodimlar = () => {
     const {t} = useTranslation();
@@ -129,19 +130,31 @@ export const Xodimlar = () => {
             render: (day: boolean) => (
                 <div
                     className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? 'bg-gray-500' : day ? 'bg-green-500' : 'bg-red-500'}`}>
-                    {day == null ? <></> : (day ? <>+</> : <>x</>)}
+                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'} />: <IoMdClose className={'text-white text-[18px]'}/>)}
                 </div>
             )
         },
         {
             title: '23-yan',
             dataIndex: 'day',
-            key: '23-yan'
+            key: '23-yan',
+            render: (day: boolean) => (
+                <div
+                    className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? 'bg-gray-500' : day ? 'bg-green-500' : 'bg-red-500'}`}>
+                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'}/> : <IoMdClose className={'text-white text-[18px]'}/>)}
+                </div>
+            )
         },
         {
             title: '24-yan',
             dataIndex: 'day',
-            key: '24-yan'
+            key: '24-yan',
+            render: (day: boolean) => (
+                <div
+                    className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? 'bg-gray-500' : day ? 'bg-green-500' : 'bg-red-500'}`}>
+                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'}/> : <IoMdClose className={'text-white text-[18px]'}/>)}
+                </div>
+            )
         }
     ]
 
