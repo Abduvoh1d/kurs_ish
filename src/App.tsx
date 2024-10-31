@@ -16,8 +16,10 @@ import { Moliya } from "./pages/moliya/Moliya.tsx";
 import { ConfigProvider } from "antd"; // Ant Design ConfigProvider import qilindi
 import { useTranslation } from "react-i18next";
 import './i18n/i18n.ts';
+import {Login} from "./pages/login/Login.tsx";
+import {Register} from "./pages/register/Register.tsx";
 
-const allowedLanguages = ["ru", "uz"];
+const allowedLanguages = ["uz", "ru"];
 
 function App() {
     const { i18n } = useTranslation();
@@ -50,6 +52,8 @@ function App() {
                 },
             ],
         },
+        { path: "/login", element: <Login /> },
+        { path: "/register", element: <Register /> },
         { path: "*", element: <Not_Found /> },
     ]);
 

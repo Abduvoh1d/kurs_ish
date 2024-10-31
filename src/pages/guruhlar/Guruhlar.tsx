@@ -1,14 +1,14 @@
-import {useTranslation} from "react-i18next";
 import {Button, Col, Drawer, Dropdown, FormProps, Row, Segmented, Table, Typography} from "antd";
-import {useRouterPush} from "../../hooks/use-router-push.ts";
-import {useLocationParams} from "../../hooks/use-location-params.ts";
-import {FiPlus} from "react-icons/fi";
-import {Empty} from 'antd';
 import {HiOutlineDotsHorizontal, HiOutlineDotsVertical, HiPencil} from "react-icons/hi";
 import {AutoForm, IForm} from "../../components/auto-form/index..tsx";
-import useForm from "antd/es/form/hooks/useForm";
-import {FaRegTrashAlt} from "react-icons/fa";
+import {useLocationParams} from "../../hooks/use-location-params.ts";
+import {useRouterPush} from "../../hooks/use-router-push.ts";
 import {IoIosCheckmark, IoMdClose} from "react-icons/io";
+import useForm from "antd/es/form/hooks/useForm";
+import {useTranslation} from "react-i18next";
+import {FaRegTrashAlt} from "react-icons/fa";
+import {FiPlus} from "react-icons/fi";
+import {Empty} from 'antd';
 
 export const Guruhlar = () => {
     const [form] = useForm()
@@ -255,7 +255,7 @@ export const Guruhlar = () => {
     return (
             <div className="w-full bg-[#F9F9F9] h-full overflow-auto">
             {query.getOneGroup ? (
-                <div className="p-10 h-auto">
+                <div className="p-10">
                     <div className="text-[40px] font-[600]">
                         Web design | English Beginner | Ru.Abdulloh
                     </div>
@@ -276,47 +276,47 @@ export const Guruhlar = () => {
                                     Ru.Abdulloh</p>
 
                                 <div>
-                                    <p className={'text-[16px] font-[500] text-[#617E8C]'}>Narxi:</p>
+                                    <p className={'text-[16px] font-[500] text-[#617E8C]'}>{t('Narxi')}:</p>
                                     <p className={'text-[20px] font-[600]'}>500 000 UZS</p>
                                 </div>
 
                                 <div>
-                                    <p className={'text-[16px] font-[500] text-[#617E8C]'}>Kunlar:</p>
+                                    <p className={'text-[16px] font-[500] text-[#617E8C]'}>{t('Kunlar')}:</p>
                                     <p className={'text-[20px] font-[600]'}>Juft kunlari</p>
                                 </div>
 
                                 <div>
-                                    <p className={'text-[16px] font-[500] text-[#617E8C]'}>Xona:</p>
+                                    <p className={'text-[16px] font-[500] text-[#617E8C]'}>{t('Xona')}:</p>
                                     <p className={'text-[20px] font-[600]'}>Blue Room</p>
                                 </div>
 
                                 <div>
-                                    <p className={'text-[16px] font-[500] text-[#617E8C]'}>Boshlanish vaqti:</p>
+                                    <p className={'text-[16px] font-[500] text-[#617E8C]'}>{t('Boshlanish vaqti')}:</p>
                                     <p className={'text-[20px] font-[600]'}>08:00</p>
                                 </div>
 
                                 <div>
-                                    <p className={'text-[16px] font-[500] text-[#617E8C]'}>Boshlanish sanasi:</p>
+                                    <p className={'text-[16px] font-[500] text-[#617E8C]'}>{t('Boshlanish sanasi')}:</p>
                                     <p className={'text-[20px] font-[600]'}>2021 - 01 - 01</p>
                                 </div>
 
                                 <div>
-                                    <p className={'text-[16px] font-[500] text-[#617E8C]'}>Boshlanish sanasi:</p>
+                                    <p className={'text-[16px] font-[500] text-[#617E8C]'}>{t('Boshlanish sanasi')}:</p>
                                     <p className={'text-[20px] font-[600]'}>2021 - 07 - 01</p>
                                 </div>
 
                                 <div className={'line-through w-[100%] h-[2px] bg-[#D7DEE2]'}></div>
 
                                 <div className={'flex items-center'}>
-                                    <p className={'text-[18px] w-[33%] font-[600] font-[Poppins] flex justify-start'}>Name</p>
-                                    <p className={'text-[18px] w-[33%] font-[600] font-[Poppins] flex justify-start'}>Phone</p>
-                                    <p className={'text-[18px] w-[33%] font-[600] font-[Poppins] flex justify-center'}>Actions</p>
+                                    <p className={'text-[18px] w-[33%] font-[600] flex justify-start'}>{t('Ism')}</p>
+                                    <p className={'text-[18px] w-[33%] font-[600] flex justify-start'}>{t('Raqam')}</p>
+                                    <p className={'text-[18px] w-[33%] font-[600] flex justify-center'}>{t('Hodisa')}</p>
                                 </div>
 
                                 <div className={'flex items-center'}>
                                     <p className={'w-[33%] text-[14px] font-[500] text-[#455B66]'}>Omadbek</p>
                                     <p className={'w-[33%] text-[14px] font-[500] text-[#455B66]'}>94 778 33 73</p>
-                                    <div className={'w-[15%] flex items-center justify-center m-auto rounded-xl bg-[#7338AC] text-white'}><HiOutlineDotsHorizontal size={20}/></div>
+                                    <div className={'w-[15%] flex items-center justify-center m-auto rounded-xl bg-[#7338AC] text-white cursor-pointer'}><HiOutlineDotsHorizontal size={20}/></div>
                                 </div>
 
                             </div>
@@ -339,7 +339,7 @@ export const Guruhlar = () => {
                             <Typography.Title level={1} className="!font-semibold !mb-2">
                                 {t("Groups")}
                             </Typography.Title>
-                            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-2xl text-lg">
+                            <button className="bg-blue-600 text-white px-4 py-2 rounded-2xl text-lg">
                                 {t("Davomat")}
                             </button>
                         </div>

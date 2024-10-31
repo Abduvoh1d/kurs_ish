@@ -38,6 +38,7 @@
   "Familiya": "Фамилия",
   "Ism": "Имя",
   "Telefon raqam": "Номер телефона",
+  "Raqam": "Номер",
   "Tug'ilgan kuni": "Дата рождения",
   "Jins": "Пол",
   "Rol": "Роль",
@@ -56,5 +57,11 @@
   "Talaba profilida": "В профиле студента",
   "Hikoya": "История",
   "Profile": "Профиль",
-  "Balance:": "Balance:"
+  "Balance:": "Balance:",
+  "Narxi": "a",
+  "Kunlar": "b",
+  "Xona": "c",
+  "Kunlar": "d",
+  "Boshlanish vaqti": "e",
+  "Boshlanish sanasi": "f"
 }

@@ -8,7 +8,7 @@ export function Layout() {
             <Sider />
             <div className="flex flex-col w-full">
                 <Header />
-                <div className="flex-1 overflow-auto">
+                <div className="flex-1 overflow-y-auto">
                     <Outlet />
                 </div>
             </div>

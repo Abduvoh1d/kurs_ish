@@ -1,7 +1,19 @@
 {
-  "files": [],
+  "compilerOptions": {
+    "target": "es2020",                      // Specify ECMAScript target version
+    "module": "commonjs",                    // Specify module code generation
+    "baseUrl": "./",                          // Base directory to resolve non-relative module names
+    "outDir": "./dist",                       // Redirect output structure to the dist folder
+    "strict": true,                           // Enable all strict type-checking options
+    "esModuleInterop": true,                  // Enables emit interoperability between CommonJS and ES Modules
+    "skipLibCheck": true,
+//    "types": ["node"],
+    "forceConsistentCasingInFileNames": true // Disallow inconsistently-cased references to the same file
+  },
+  "files": [],                               // No specific files included; use includes instead
+  "include": ["src/**/*"],                   // Include all TypeScript files in the src directory
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    { "path": "./tsconfig.app.json" },      // Reference to application-specific config
+    { "path": "./tsconfig.node.json" }      // Reference to Node.js specific config
   ]
 }

@@ -249,9 +249,9 @@ export const Xodimlar = () => {
     ] as IForm[]
 
     return (
-        <div className="w-full h-[85vh] bg-[#F9F9F9]">
+        <>
             {!query.profile ? (
-                <>
+                <div className="w-full h-full bg-[#F9F9F9]">
                     <div className="flex items-center justify-between mx-10 pt-7">
                         <Typography.Title level={1} className="!font-semibold !mb-2">
                             {t("Xodimlar")}
@@ -296,13 +296,13 @@ export const Xodimlar = () => {
                         <div className="flex items-center justify-end gap-3">
                             <Button onClick={onClose}>{t("Bekor qilish")}</Button>
                             <Button type="primary" htmlType="submit" onClick={() => form.submit()}>
-                                {query.edite ? t("O'zgartirish") : t("Qo'shish")}
+                                {t("O'zgartirish")}
                             </Button>
                         </div>
                     </Drawer>
-                </>
+                </div>
             ) : (
-                <div className={'px-10 pt-5 h-[80vh] overflow-y-auto'}>
+                <div className={'px-10 pt-5 bg-[#F9F9F9] overflow-y-auto'}>
                     <div className={'flex justify-between items-center gap-4 me-10'}>
                         <div className={'flex items-center gap-5'}>
                             <Typography.Title level={1} className="!font-semibold !mb-2">
@@ -327,7 +327,7 @@ export const Xodimlar = () => {
                     </div>
 
                     {query.sort === t('Profile') ? (
-                        <Row className={'mt-6 h-[72vh] gap-8'}>
+                        <Row className={'my-10 gap-8'}>
                             <Col span={8} className={'w-[100%] min-h-[100%] p-5 bg-white shadow-lg'}>
                                 <div className={'w-[100%] flex justify-end'}>
                                     <div onClick={edite} className={'p-3 bg-orange-300 rounded-full cursor-pointer'}>
@@ -398,67 +398,67 @@ export const Xodimlar = () => {
                                     </Col>
                                 </Row>
 
-                                <div className={'w-[100%] min-h-[100%]'}>
+                                <div>
                                     <p className={'text-[20px] font-[600]'}>{t('Payments')}</p>
 
                                     <div
-                                        className={'h-[74vh] w-[100%] overflow-y-auto mt-5 bg-white flex flex-col gap-8'}>
+                                        className={'h-[75vh] w-[100%] overflow-y-auto mt-5 bg-white flex flex-col gap-8'}>
                                         <div
-                                            className={'flex items-center bg-[#F7F7F7] py-5 px-4 shadow-lg'}>
+                                            className={'flex items-center bg-[#F7F7F7] p-5 shadow-lg'}>
                                             <p className={'text-[14px] font-[500] w-[50%]'}>Date of payment</p>
-                                            <p className={'font-[Poppins]'}>23.02.2023</p>
+                                            <p>23.02.2023</p>
                                         </div>
 
                                         <div
-                                            className={'flex items-center bg-[#F7F7F7] py-5 px-4 shadow-lg'}>
+                                            className={'flex items-center bg-[#F7F7F7] p-5 shadow-lg'}>
                                             <p className={'text-[14px] font-[500] w-[50%]'}>Groups</p>
-                                            <p className={'font-[Poppins]'}>-</p>
+                                            <p>-</p>
                                         </div>
 
                                         <div
-                                            className={'flex items-center bg-[#F7F7F7] py-5 px-4 shadow-lg'}>
+                                            className={'flex items-center bg-[#F7F7F7] p-5 shadow-lg'}>
                                             <p className={'text-[14px] font-[500] w-[50%]'}>Amount</p>
-                                            <p className={'font-[Poppins] w-[50%]'}><span className={'text-[#0ABF49]'}>400 000</span> UZS
+                                            <p className={' w-[50%]'}><span className={'text-[#0ABF49]'}>400 000</span> UZS
                                             </p>
                                         </div>
 
                                         <div
-                                            className={'flex items-center bg-[#F7F7F7] py-5 px-4 shadow-lg'}>
+                                            className={'flex items-center bg-[#F7F7F7] p-5 shadow-lg'}>
                                             <p className={'text-[14px] font-[500] w-[50%]'}>Comment</p>
-                                            <div className={'font-[Poppins]'}>Lorem ipsum</div>
+                                            <div>Lorem ipsum</div>
                                         </div>
 
                                         <div
-                                            className={'flex items-center bg-[#F7F7F7] py-5 px-4 shadow-lg'}>
+                                            className={'flex items-center bg-[#F7F7F7] p-5 shadow-lg'}>
                                             <p className={'text-[14px] font-[500] w-[50%]'}>Who Paid</p>
-                                            <div className={'font-[Poppins]'}>Ra. Abdullah</div>
+                                            <div>Ra. Abdullah</div>
                                         </div>
 
                                         <div
-                                            className={'flex items-center bg-[#F7F7F7] py-5 px-4 shadow-lg'}>
+                                            className={'flex items-center bg-[#F7F7F7] p-5 shadow-lg'}>
                                             <p className={'text-[14px] font-[500] w-[50%]'}>How many students?</p>
-                                            <p className={'font-[Poppins]'}>44</p>
+                                            <p>44</p>
                                         </div>
 
                                         <div
-                                            className={'flex items-center bg-[#F7F7F7] py-5 px-4 shadow-lg'}>
+                                            className={'flex items-center bg-[#F7F7F7] p-5 shadow-lg'}>
                                             <p className={'text-[14px] font-[500] w-[50%]'}>Credit</p>
-                                            <div className={'font-[Poppins]'}><span className={'text-[#E70C0C]'}>-400 000</span> UZS
+                                            <div><span className={'text-[#E70C0C]'}>-400 000</span> UZS
                                             </div>
                                         </div>
 
                                         <div
-                                            className={'flex items-center bg-[#F7F7F7] py-4 px-4 shadow-lg'}>
+                                            className={'flex items-center bg-[#F7F7F7] px-5 py-4 shadow-lg'}>
                                             <p className={'text-[14px] font-[500] w-[50%]'}>Return</p>
                                             <button
-                                                className={'font-[Poppins] bg-[#E70C0C] text-white px-4 py-1 rounded-md'}>Return
+                                                className={' bg-[#E70C0C] text-white px-4 py-1 rounded-md'}>Return
                                             </button>
                                         </div>
 
                                         <div
-                                            className={'flex items-center bg-[#F7F7F7] py-5 px-4 shadow-lg'}>
+                                            className={'flex items-center bg-[#F7F7F7] p-5 shadow-lg'}>
                                             <p className={'text-[14px] font-[500] w-[50%]'}>Monthly output</p>
-                                            <p className={'font-[Poppins]'}><span
+                                            <p><span
                                                 className={'text-[#0ABF49]'}>400 000</span> UZS</p>
                                             <div></div>
                                         </div>
@@ -467,7 +467,7 @@ export const Xodimlar = () => {
                             </Col>
                         </Row>
                     ) : (query.sort === t('Hikoya') && (
-                        <Row className={'mt-10 h-[100%]'}>
+                        <Row className={'my-10'}>
                             <Col span={13} className={'pe-5'}>
                                 <div className={'w-[100%] h-[100%] flex flex-col gap-5'}>
                                     <div className={'flex items-center bg-white px-8 py-3 rounded-xl'}>
@@ -526,6 +526,6 @@ export const Xodimlar = () => {
                     ))}
                 </div>
             )}
-        </div>
+        </>
     );
 };
