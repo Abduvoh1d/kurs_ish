@@ -19,9 +19,6 @@
   },
   "files": [],
   // No specific files included; use includes instead
-  "include": [
-    "src/**/*"
-  ],
   // Include all TypeScript files in the src directory
   "references": [
     {
