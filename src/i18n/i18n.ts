@@ -11,7 +11,7 @@ i18n
         supportedLngs: ["uz", "ru"],
         fallbackLng: "ru",
         detection: {
-            order: ["path", "cookie", "localStorage", "navigator"],
+            order: ["path", "cookie", "navigator" ,"localStorage"],
             caches: ["cookie"],
         },
         backend: {

@@ -45,7 +45,8 @@ export function Login() {
                         onClick={() => form.submit()}>Submit</Button>
 
                 <p className={'text-center mt-10'}>You do not have account <Link to={'/register'}
-                                                                           className={'text-green-500 ml-1'}>Sign in</Link>
+                                                                                 className={'text-green-500 ml-1'}>Sign
+                    in</Link>
                 </p>
             </div>
         </div>

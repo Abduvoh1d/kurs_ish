@@ -2,7 +2,7 @@ import {
     Checkbox, CheckboxOptionType, Col, ColorPicker, DatePicker, Form, FormInstance, Input,
     InputNumber, Radio, Row, Select, SelectProps, TimePicker, Upload
 } from "antd";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 import i18n from "i18next";
 
 export interface IForm {
@@ -51,7 +51,7 @@ export function AutoForm({
                              initialValues,
                              onFinish
                          }: AutoFormProps) {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
 
     function getInput(props: IForm) {
         const commonProps = {
@@ -71,7 +71,7 @@ export function AutoForm({
             case 'input':
                 return <Input {...commonProps} {...length} />;
             case 'textarea':
-                return <Input.TextArea {...commonProps} {...length} rows={props.rows} />;
+                return <Input.TextArea {...commonProps} {...length} rows={props.rows}/>;
             case 'password':
                 return <Input.Password {...commonProps} {...length} />;
             case 'checkbox':
@@ -79,27 +79,27 @@ export function AutoForm({
             case 'email':
                 return <Input type="email" {...commonProps} {...length} />;
             case 'datePicker':
-                return <DatePicker {...commonProps} size={props.size} />;
+                return <DatePicker {...commonProps} size={props.size}/>;
             case 'rangePicker':
-                return <DatePicker.RangePicker   size={props.size} />;
+                return <DatePicker.RangePicker size={props.size}/>;
             case 'number':
                 return <InputNumber {...commonProps} {...length} />;
             case 'timePicker':
-                return <TimePicker {...commonProps} size={props.size} />;
+                return <TimePicker {...commonProps} size={props.size}/>;
             case 'radio':
                 return <Radio.Group options={props.radioOptions} {...commonProps} />;
             case 'upload':
-                return <Upload multiple={false} maxCount={1} />;
+                return <Upload multiple={false} maxCount={1}/>;
             case 'url':
                 return <Input type="url" {...commonProps} {...length} />;
             case 'select':
-                return <Select options={props.option} {...commonProps} size={props.size} />;
+                return <Select options={props.option} {...commonProps} size={props.size}/>;
             case 'phone':
                 return <Input type="tel" {...commonProps} {...length} />;
             case 'colorPicker':
-                return <ColorPicker {...commonProps} size={props.size} defaultValue="#395f94" />;
+                return <ColorPicker {...commonProps} size={props.size} defaultValue="#395f94"/>;
             default:
-                return <Input {...commonProps} {...length} size={props.size} />;
+                return <Input {...commonProps} {...length} size={props.size}/>;
         }
     }
 

@@ -17,7 +17,6 @@ export const Xodimlar = () => {
     const {push} = useRouterPush();
     const {query} = useLocationParams();
 
-
     const onFinish: FormProps['onFinish'] = (values) => {
         if (values.dataOfBirth) {
             values.dataOfBirth = dayjs(values.dataOfBirth).format("DD/MM/YYYY");
@@ -130,7 +129,8 @@ export const Xodimlar = () => {
             render: (day: boolean) => (
                 <div
                     className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? 'bg-gray-500' : day ? 'bg-green-500' : 'bg-red-500'}`}>
-                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'} />: <IoMdClose className={'text-white text-[18px]'}/>)}
+                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'}/> :
+                        <IoMdClose className={'text-white text-[18px]'}/>)}
                 </div>
             )
         },
@@ -141,7 +141,8 @@ export const Xodimlar = () => {
             render: (day: boolean) => (
                 <div
                     className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? 'bg-gray-500' : day ? 'bg-green-500' : 'bg-red-500'}`}>
-                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'}/> : <IoMdClose className={'text-white text-[18px]'}/>)}
+                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'}/> :
+                        <IoMdClose className={'text-white text-[18px]'}/>)}
                 </div>
             )
         },
@@ -152,7 +153,8 @@ export const Xodimlar = () => {
             render: (day: boolean) => (
                 <div
                     className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? 'bg-gray-500' : day ? 'bg-green-500' : 'bg-red-500'}`}>
-                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'}/> : <IoMdClose className={'text-white text-[18px]'}/>)}
+                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'}/> :
+                        <IoMdClose className={'text-white text-[18px]'}/>)}
                 </div>
             )
         }
@@ -328,7 +330,7 @@ export const Xodimlar = () => {
 
                     {query.sort === t('Profile') ? (
                         <Row className={'my-10 gap-8'}>
-                            <Col span={8} className={'w-[100%] min-h-[100%] p-5 bg-white shadow-lg'}>
+                            <Col span={8} className={'px-5 py-9 bg-white shadow-lg'}>
                                 <div className={'w-[100%] flex justify-end'}>
                                     <div onClick={edite} className={'p-3 bg-orange-300 rounded-full cursor-pointer'}>
                                         <LuPencil/>
@@ -360,8 +362,8 @@ export const Xodimlar = () => {
                                     </div>
                                 )}
                             </Col>
-                            <Col span={15} className={'w-[100%] h-[100%]'}>
-                                <p className={'text-[26px] font-[600] font-[Poppins]]'}>Groups</p>
+                            <Col span={15} className={'w-[100%]'}>
+                                <p className={'text-[26px] font-[600] font-[Poppins]'}>Groups</p>
 
                                 <Row className={'mb-5 mt-2'}>
                                     <Col span={12} className={'px-2 mb-2'}>
@@ -418,7 +420,8 @@ export const Xodimlar = () => {
                                         <div
                                             className={'flex items-center bg-[#F7F7F7] p-5 shadow-lg'}>
                                             <p className={'text-[14px] font-[500] w-[50%]'}>Amount</p>
-                                            <p className={' w-[50%]'}><span className={'text-[#0ABF49]'}>400 000</span> UZS
+                                            <p className={' w-[50%]'}><span
+                                                className={'text-[#0ABF49]'}>400 000</span> UZS
                                             </p>
                                         </div>
 

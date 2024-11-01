@@ -1,4 +1,4 @@
-import { ToastContainer, toast } from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const SuccessToast = (message: string) => {
@@ -40,4 +40,4 @@ export const InfoToast = (message: string) => {
     });
 };
 
-export const ToastConfig = () => <ToastContainer />;
+export const ToastConfig = () => <ToastContainer/>;

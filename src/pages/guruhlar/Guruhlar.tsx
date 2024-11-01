@@ -120,7 +120,8 @@ export const Guruhlar = () => {
             render: (day: boolean) => (
                 <div
                     className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? 'bg-[#D0D9DD]' : day ? 'bg-green-500' : 'bg-red-500'}`}>
-                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'} />: <IoMdClose className={'text-white text-[18px]'}/>)}
+                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'}/> :
+                        <IoMdClose className={'text-white text-[18px]'}/>)}
                 </div>
             )
         },
@@ -131,7 +132,8 @@ export const Guruhlar = () => {
             render: (day: boolean) => (
                 <div
                     className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? 'bg-[#D0D9DD]' : day ? 'bg-green-500' : 'bg-red-500'}`}>
-                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'}/> : <IoMdClose className={'text-white text-[18px]'}/>)}
+                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'}/> :
+                        <IoMdClose className={'text-white text-[18px]'}/>)}
                 </div>
             )
         },
@@ -142,7 +144,8 @@ export const Guruhlar = () => {
             render: (day: boolean) => (
                 <div
                     className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? 'bg-[#D0D9DD]' : day ? 'bg-green-500' : 'bg-red-500'}`}>
-                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'}/> : <IoMdClose className={'text-white text-[18px]'}/>)}
+                    {day == null ? <></> : (day ? <IoIosCheckmark className={'text-white text-[26px]'}/> :
+                        <IoMdClose className={'text-white text-[18px]'}/>)}
                 </div>
             )
         }
@@ -253,7 +256,7 @@ export const Guruhlar = () => {
     ] as IForm[]
 
     return (
-            <div className="w-full bg-[#F9F9F9] h-full overflow-auto">
+        <div className="w-full bg-[#F9F9F9] h-full overflow-auto">
             {query.getOneGroup ? (
                 <div className="p-10">
                     <div className="text-[40px] font-[600]">
@@ -316,7 +319,9 @@ export const Guruhlar = () => {
                                 <div className={'flex items-center'}>
                                     <p className={'w-[33%] text-[14px] font-[500] text-[#455B66]'}>Omadbek</p>
                                     <p className={'w-[33%] text-[14px] font-[500] text-[#455B66]'}>94 778 33 73</p>
-                                    <div className={'w-[15%] flex items-center justify-center m-auto rounded-xl bg-[#7338AC] text-white cursor-pointer'}><HiOutlineDotsHorizontal size={20}/></div>
+                                    <div
+                                        className={'w-[15%] flex items-center justify-center m-auto rounded-xl bg-[#7338AC] text-white cursor-pointer'}>
+                                        <HiOutlineDotsHorizontal size={20}/></div>
                                 </div>
 
                             </div>

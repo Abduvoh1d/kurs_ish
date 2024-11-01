@@ -25,7 +25,7 @@ body {
     display: none;
 }
 
-.ant-segmented-item-selected{
+.ant-segmented-item-selected {
     background-color: #635AD9 !important;
     color: #fff !important;
 }

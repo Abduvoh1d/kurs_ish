@@ -54,7 +54,7 @@ export function Sider() {
     return (
         <AntdSlider
             theme="light"
-                className="px-[30px] py-[20px] w-[300px] relative overflow-hidden"
+            className="px-[30px] py-[20px] w-[300px] relative overflow-hidden"
             width={300}
         >
             <div className="flex items-center justify-start gap-5">
