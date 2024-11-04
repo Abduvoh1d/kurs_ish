@@ -1,6 +1,7 @@
 import {Button, Result} from 'antd';
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import PagesConfig from "../../config/pages.config.ts";
 
 export function Not_Found() {
     const {i18n} = useTranslation()
@@ -11,7 +12,7 @@ export function Not_Found() {
                 status="404"
                 title="404"
                 subTitle="Sorry, the page you visited does not exist."
-                extra={<Link to={`/${i18n.language}/dashboard`}><Button type="primary">Back Home</Button></Link>}
+                extra={<Link to={`/${i18n.language}/${PagesConfig.Dashboard}\``}><Button type="primary">Back Home</Button></Link>}
             />
         </div>
     );

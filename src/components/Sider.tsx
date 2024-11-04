@@ -6,6 +6,7 @@ import {Layout, Typography} from 'antd';
 import {Link, useLocation} from "react-router-dom";
 import {MdLogout} from "react-icons/md";
 import {useTranslation} from "react-i18next";
+import Pages from "../config/pages.config.ts";
 
 const {Sider: AntdSlider} = Layout;
 
@@ -17,37 +18,37 @@ export function Sider() {
         {
             name: t('Dashboard'),
             icon: <RiDashboardLine/>,
-            link: '/dashboard',
+            link: `/${Pages.Dashboard}`,
         },
         {
             name: t('Guruhlar'),
             icon: <FaUsers/>,
-            link: '/guruhlar',
+            link: `/${Pages.Guruhlar}`,
         },
         {
             name: t('Xodimlar'),
             icon: <FaUserTie/>,
-            link: '/xodimlar',
+            link: `/${Pages.Xodimlar}`,
         },
         {
             name: t('Xonalar'),
             icon: <TfiBlackboard/>,
-            link: '/xonalar',
+            link: `/${Pages.Xonalar}`,
         },
         {
             name: t('Talabalar'),
             icon: <FaBookReader/>,
-            link: '/talabalar',
+            link: `/${Pages.Talabalar}`,
         },
         {
             name: t('Moliya'),
             icon: <IoMdWallet/>,
-            link: '/moliya',
+            link: `/${Pages.Moliya}`,
         },
         {
             name: t('Sozlamalar'),
             icon: <IoMdSettings/>,
-            link: '/sozlamalar',
+            link: `/${Pages.Sozlamalar}`,
         }
     ];
 
@@ -83,7 +84,7 @@ export function Sider() {
                     ))}
 
                     <Link
-                        to="/login"
+                        to={`/${Pages.Login}`}
                         className="flex justify-start items-center w-[80%] gap-3 font-[600] px-[20px] py-[15px]
         rounded-xl cursor-pointer absolute bottom-5 hover:text-black"
                     >

@@ -1,4 +1,4 @@
-import {Button, Col, Drawer, Dropdown, FormProps, Row, Segmented, Table, Typography} from "antd";
+import {Button, Col, Dropdown, FormProps, Row, Segmented, Table, Typography} from "antd";
 import {HiOutlineDotsHorizontal, HiOutlineDotsVertical, HiPencil} from "react-icons/hi";
 import {AutoForm, IForm} from "../../components/auto-form/index..tsx";
 import {useLocationParams} from "../../hooks/use-location-params.ts";
@@ -9,15 +9,52 @@ import {useTranslation} from "react-i18next";
 import {FaRegTrashAlt} from "react-icons/fa";
 import {FiPlus} from "react-icons/fi";
 import {Empty} from 'antd';
+import {useQuery} from "@tanstack/react-query";
+import GroupStore from "../../store/Groups.ts";
+import {IGroups} from "../../types";
+import {observer} from "mobx-react-lite";
+import {AutoDrower} from "../../components/auto-drower";
 
-export const Guruhlar = () => {
+export const Guruhlar = observer(() => {
     const [form] = useForm()
     const {push} = useRouterPush();
     const {query} = useLocationParams();
     const {t} = useTranslation();
 
-    const onFinish: FormProps['onFinish'] = (values) => {
+    const {data: groupData, isSuccess: groupSuccess, isFetching: groupFetching} = useQuery<IGroups[]>({
+        queryKey: ['groups'],
+        queryFn: (): Promise<IGroups[]> => GroupStore.getGroups(),
+        retry: 1
+    });
+
+    // const {data: oneGroup} = useMutation<IGroups>({
+    //     mutationKey: ['oneGroup'],
+    //     mutationFn: (): Promise<IGroups> => GroupStore.getOneGroup(Number(query.getOneGroup))
+    // })
+    //
+    // const {data: createGroup} = useMutation({
+    //     mutationKey: ['createGroup'],
+    //     mutationFn: () => GroupStore.createGroup()
+    // })
+    //
+    // const {data: updateGroup} = useMutation({
+    //     mutationKey: ['updateGroup'],
+    //     mutationFn: () => GroupStore.updateGroup()
+    // })
+    //
+    // const {data: deleteGroup} = useMutation({
+    //     mutationKey: ['deleteGroup'],
+    //     mutationFn: () => GroupStore.deleteGroup()
+    // })
+
+    const onFinish: FormProps['onFinish'] = (values: IGroups) => {
         console.log(values);
+        if (Number(query.getOneGroup)) {
+            console.log('update')
+        }
+        {
+            console.log('add')
+        }
         onClose()
     };
 
@@ -34,13 +71,13 @@ export const Guruhlar = () => {
         push({query: {...query, add: true}})
     }
 
-    function onClose() {
-        form.resetFields();
-        push({query: {...query, add: undefined}})
+    function edite(id: number) {
+        push({query: {...query, edite: true, id}})
     }
 
-    function getOneGroup() {
-        push({query: {...query, getOneGroup: true}})
+    function onClose() {
+        form.resetFields();
+        push({query: {...query, edite: undefined, id: undefined, add: undefined}})
     }
 
     const columns = [
@@ -51,8 +88,8 @@ export const Guruhlar = () => {
         },
         {
             title: t('Guruhlar'),
-            dataIndex: 'groups',
-            key: 'groups',
+            dataIndex: 'name',
+            key: 'name',
         },
         {
             title: t('Ustozlar'),
@@ -61,13 +98,13 @@ export const Guruhlar = () => {
         },
         {
             title: t("O'quvchi raqam"),
-            dataIndex: 'number',
-            key: 'number',
+            dataIndex: 'teacher',
+            key: 'teacher',
         },
         {
             title: t('Vaqt'),
-            dataIndex: 'time',
-            key: 'time',
+            dataIndex: 'course_start_time',
+            key: 'course_start_time',
         },
         {
             title: t('Kun'),
@@ -78,14 +115,14 @@ export const Guruhlar = () => {
             title: t('Hodisa'),
             key: 'days',
             dataIndex: '.',
-            render: () => {
+            render: (_: unknown, item: IGroups) => {
                 return (
                     <Dropdown menu={{
                         items: [
                             {
                                 key: '1',
                                 label: (
-                                    <p className="cursor-pointer text-[16px]" onClick={getOneGroup}>
+                                    <p className="cursor-pointer text-[16px]" onClick={() => edite(item.id)}>
                                         {t("O'zgartirish")}
                                     </p>
                                 ),
@@ -158,40 +195,10 @@ export const Guruhlar = () => {
         {key: '4', name: 'Python', day: false},
     ]
 
-    const data = [
-        {
-            key: '1',
-            id: 1,
-            groups: 'Mathematics Group A',
-            teacher: 'John Doe',
-            number: '10',
-            time: '10:00 - 11:30',
-            days: 'Mon, Wed, Fri',
-        },
-        {
-            key: '2',
-            id: 2,
-            groups: 'Physics Group B',
-            teacher: 'Jane Smith',
-            number: '15',
-            time: '12:00 - 13:30',
-            days: 'Tue, Thu',
-        },
-        {
-            key: '3',
-            id: 3,
-            groups: 'Chemistry Group C',
-            teacher: 'Dr. Albert',
-            number: '8',
-            time: '14:00 - 15:30',
-            days: 'Mon, Wed',
-        },
-    ];
-
-    const formData = [
+    const formData: IForm[] = [
         {
             label: t('Kurs nomi'),
-            name: 'kurs',
+            name: 'name',
             size: 'large',
             span: 24,
             required: true,
@@ -204,9 +211,9 @@ export const Guruhlar = () => {
             name: 'teacher',
             required: true,
             option: [
-                {label: "Tech1", value: "tech1"},
-                {label: "Tech2", value: "tech2"},
-                {label: "Tech3", value: "tech3"},
+                {label: "Tech1", value: 1},
+                {label: "Tech2", value: 1},
+                {label: "Tech3", value: 1},
             ]
         },
         {
@@ -253,11 +260,11 @@ export const Guruhlar = () => {
             required: true,
             className: 'w-full',
         }
-    ] as IForm[]
+    ]
 
     return (
         <div className="w-full bg-[#F9F9F9] h-full overflow-auto">
-            {query.getOneGroup ? (
+            {query.id ? (
                 <div className="p-10">
                     <div className="text-[40px] font-[600]">
                         Web design | English Beginner | Ru.Abdulloh
@@ -373,10 +380,11 @@ export const Guruhlar = () => {
                     </div>
 
                     <div className="mt-10">
-                        <Table
+                        <Table<IGroups>
                             id="GroupTable"
                             columns={columns}
-                            dataSource={data}
+                            dataSource={groupSuccess ? groupData : []}
+                            loading={groupFetching}
                             size="large"
                             locale={{
                                 emptyText: <Empty description={<span>{t("Malumot topilmadi")}</span>}/>,
@@ -384,10 +392,10 @@ export const Guruhlar = () => {
                         />
                     </div>
 
-                    <Drawer
+                    <AutoDrower
                         title={t("Yangi guruh qo'shish")}
                         onClose={onClose}
-                        open={Boolean(query.add)}
+                        open={Boolean(query.add) || Boolean(query.edite)}
                         width={530}
                     >
                         <AutoForm props={formData} form={form} layout="vertical" onFinish={onFinish}/>
@@ -397,10 +405,9 @@ export const Guruhlar = () => {
                                 {query.edite ? t("O'zgartirish") : t("Qo'shish")}
                             </Button>
                         </div>
-                    </Drawer>
+                    </AutoDrower>
                 </>
             )}
         </div>
-    );
-
-}
+    )
+})

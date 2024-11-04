@@ -33,31 +33,12 @@ export function Talabalar() {
 
     function onClose() {
         form.resetFields();
-        push({query: {...query, add: undefined, edite: undefined}})
+        push({query: {...query, add: undefined, edite: undefined , id: undefined}})
     }
 
-    function edite() {
-        push({query: {...query, edite: true}})
+    function edite(id: number) {
+        push({query: {...query, edite: true , id}})
     }
-
-    const menuItems: MenuProps['items'] = [
-        {
-            key: '1',
-            label: (
-                <p className="cursor-pointer text-[16px]" onClick={edite}>
-                    {t("O'zgartirish")}
-                </p>
-            ),
-        },
-        {
-            key: '2',
-            label: (
-                <p className="cursor-pointer text-[16px]">
-                    {t("O'chirish")}
-                </p>
-            ),
-        },
-    ];
 
     const columns = [
         {
@@ -89,9 +70,26 @@ export function Talabalar() {
             title: t('Hodisa'),
             key: 'days',
             dataIndex: '.',
-            render: () => {
+            render: (_ , item) => {
                 return (
-                    <Dropdown menu={{items: menuItems}} trigger={['click']} placement="bottomRight">
+                    <Dropdown menu={{items: [
+                            {
+                                key: '1',
+                                label: (
+                                    <p className="cursor-pointer text-[16px]" onClick={() => edite(item.id)}>
+                                        {t("O'zgartirish")}
+                                    </p>
+                                ),
+                            },
+                            {
+                                key: '2',
+                                label: (
+                                    <p className="cursor-pointer text-[16px]">
+                                        {t("O'chirish")}
+                                    </p>
+                                ),
+                            },
+                        ]}} trigger={['click']} placement="bottomRight">
                         <HiOutlineDotsVertical className="cursor-pointer"/>
                     </Dropdown>
                 );
@@ -158,20 +156,6 @@ export function Talabalar() {
             required: true,
         },
         {
-            label: t("Rol"),
-            size: 'large',
-            type: 'select',
-            name: 'role',
-            span: 24,
-            option: [
-                {label: t('Admin'), value: t('Admin')},
-                {label: t('Ustoz'), value: t('Ustoz')},
-                {label: t('O\'quvchi'), value: t('O\'quvchi')},
-            ],
-            className: 'w-full',
-            required: true,
-        },
-        {
             label: t("Tug'ilgan kuni"),
             size: 'large',
             type: 'datePicker',
@@ -230,7 +214,7 @@ export function Talabalar() {
             </div>
 
             <Drawer
-                title={t("Yangi guruh qo’shish")}
+                title={t(query.add ? "Yangi talaba qo’shish" : "Talabani o'zgartish")}
                 onClose={onClose}
                 open={Boolean(query.add) || Boolean(query.edite)}
                 width={530}

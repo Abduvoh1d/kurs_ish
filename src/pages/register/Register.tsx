@@ -2,6 +2,7 @@ import {AutoForm, IForm} from "../../components/auto-form/index..tsx";
 import useForm from "antd/es/form/hooks/useForm";
 import {Button, FormProps} from "antd";
 import {Link} from "react-router-dom";
+import Pages from "../../config/pages.config.ts";
 
 export function Register() {
     const [form] = useForm()
@@ -51,7 +52,7 @@ export function Register() {
                 <Button type={'primary'} className={'w-[100%]'} size={'large'}
                         onClick={() => form.submit()}>Submit</Button>
 
-                <p className={'text-center mt-10'}>You do not have account <Link to={'/login'}
+                <p className={'text-center mt-10'}>You do not have account <Link to={`/${Pages.Login}`}
                                                                                  className={'text-green-500 ml-1 '}>Login</Link>
                 </p>
             </div>

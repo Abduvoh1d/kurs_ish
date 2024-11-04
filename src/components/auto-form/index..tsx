@@ -67,9 +67,11 @@ export function AutoForm({
             variant: props.variant,
         };
 
+
+
         switch (props.type) {
             case 'input':
-                return <Input {...commonProps} {...length} />;
+                return <Input {...commonProps} {...length}/>;
             case 'textarea':
                 return <Input.TextArea {...commonProps} {...length} rows={props.rows}/>;
             case 'password':

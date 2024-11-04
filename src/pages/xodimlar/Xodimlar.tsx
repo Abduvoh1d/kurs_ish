@@ -329,8 +329,8 @@ export const Xodimlar = () => {
                     </div>
 
                     {query.sort === t('Profile') ? (
-                        <Row className={'my-10 gap-8'}>
-                            <Col span={8} className={'px-5 py-9 bg-white shadow-lg'}>
+                        <Row className={'my-10 h-auto gap-8'}>
+                            <Col span={8} className={'px-5 pt-8 pb-2 bg-white shadow-lg'}>
                                 <div className={'w-[100%] flex justify-end'}>
                                     <div onClick={edite} className={'p-3 bg-orange-300 rounded-full cursor-pointer'}>
                                         <LuPencil/>
@@ -404,7 +404,7 @@ export const Xodimlar = () => {
                                     <p className={'text-[20px] font-[600]'}>{t('Payments')}</p>
 
                                     <div
-                                        className={'h-[75vh] w-[100%] overflow-y-auto mt-5 bg-white flex flex-col gap-8'}>
+                                        className={'h-[82vh] w-[100%] overflow-y-auto mt-5 bg-white flex flex-col gap-8'}>
                                         <div
                                             className={'flex items-center bg-[#F7F7F7] p-5 shadow-lg'}>
                                             <p className={'text-[14px] font-[500] w-[50%]'}>Date of payment</p>
@@ -470,7 +470,7 @@ export const Xodimlar = () => {
                             </Col>
                         </Row>
                     ) : (query.sort === t('Hikoya') && (
-                        <Row className={'my-10'}>
+                        <Row className={'my-10 h-auto'}>
                             <Col span={13} className={'pe-5'}>
                                 <div className={'w-[100%] h-[100%] flex flex-col gap-5'}>
                                     <div className={'flex items-center bg-white px-8 py-3 rounded-xl'}>

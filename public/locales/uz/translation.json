@@ -12,7 +12,6 @@
   "Davomat": "Davomat",
   "Arxiv": "Arxiv",
   "Faol": "Faol",
-  "Ustozlar": "Ustozlar",
   "O'quvchi raqam": "O'quvchi raqam",
   "Yangisini qo'shing": "Yangisini qo'shing",
   "Malumot topilmadi": "Malumot topilmadi",
@@ -51,10 +50,12 @@
   "Hikoya": "Hikoya",
   "Profile": "Profile",
   "Balance:": "Balance:",
-  "Narxi": "a",
-  "Kunlar": "b",
-  "Xona": "c",
-  "Kunlar": "d",
-  "Boshlanish vaqti": "e",
-  "Boshlanish sanasi": "f"
+  "Narxi": "Narxi",
+  "Xona": "Xona",
+  "Kunlar": "Kunlar",
+  "Boshlanish vaqti": "Boshlanish vaqti",
+  "Boshlanish sanasi": "Boshlanish sanasi",
+  "Vaqt": "Vaqt",
+  "Hodisa": "Hodisa",
+  "Rol": "Rol"
 }
