@@ -108,8 +108,8 @@ export const Guruhlar = observer(() => {
         },
         {
             title: t('Kun'),
-            dataIndex: 'days',
-            key: 'days',
+            dataIndex: 'day',
+            key: 'day',
         },
         {
             title: t('Hodisa'),

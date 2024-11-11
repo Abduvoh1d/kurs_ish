@@ -30,7 +30,7 @@ export function Login() {
 
     return (
         <div
-            className="h-[100vh] w-[100%] flex items-center justify-center"
+            className="h-[100vh] w-[100%] flex items-center justify-center main-bg"
             style={{
                 backgroundImage: "url('/loginImage.webp')",
                 backgroundSize: "cover",
@@ -39,7 +39,7 @@ export function Login() {
             }}
         >
             <div
-                className={'bg-white p-10 flex flex-col items-center justify-between rounded-2xl relative backdrop-blur-md'}>
+                className={'bg-white p-10 flex flex-col items-center justify-between rounded-2xl relative'}>
                 <p className={'text-[45px] font-[500]'}>Login</p>
                 <AutoForm props={props} form={form} onFinish={onFinish} layout={'vertical'}/>
                 <Button type={'primary'} className={'w-[100%]'} size={'large'}

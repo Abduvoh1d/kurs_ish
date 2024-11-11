@@ -33,3 +33,7 @@ body {
 .ant-segmented-item-selected::after, .ant-segmented-item-selected::before {
     background-color: #635AD9 !important;
 }
+
+.main-bg {
+    backdrop-filter: blur(15px);
+}
