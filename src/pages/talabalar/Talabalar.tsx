@@ -1,5 +1,5 @@
 import {useTranslation} from "react-i18next";
-import {Button, Drawer, Dropdown, Empty, FormProps, MenuProps, Segmented, Table, Typography} from "antd";
+import {Button, Drawer, Dropdown, Empty, FormProps, Segmented, Table, Typography} from "antd";
 import {FiPlus} from "react-icons/fi";
 import {AutoForm, IForm} from "../../components/auto-form/index..tsx";
 import useForm from "antd/es/form/hooks/useForm";
@@ -70,13 +70,13 @@ export function Talabalar() {
             title: t('Hodisa'),
             key: 'days',
             dataIndex: '.',
-            render: (_ , item) => {
+            render: (_: unknown , item: unknown) => {
                 return (
                     <Dropdown menu={{items: [
                             {
                                 key: '1',
                                 label: (
-                                    <p className="cursor-pointer text-[16px]" onClick={() => edite(item.id)}>
+                                    <p className="cursor-pointer text-[16px]" onClick={() => edite(Number((item as { id: number }).id))}>
                                         {t("O'zgartirish")}
                                     </p>
                                 ),
