@@ -14,6 +14,8 @@ import GroupStore from "../../store/Groups.ts";
 import {IGroups} from "../../types";
 import {observer} from "mobx-react-lite";
 import {AutoDrower} from "../../components/auto-drower";
+import {useEffect} from "react";
+import {ErrorToast} from "../../components/toastify/Toastify.tsx";
 
 export const Guruhlar = observer(() => {
     const [form] = useForm()
@@ -21,11 +23,16 @@ export const Guruhlar = observer(() => {
     const {query} = useLocationParams();
     const {t} = useTranslation();
 
-    const {data: groupData, isSuccess: groupSuccess, isFetching: groupFetching} = useQuery<IGroups[]>({
+    const {data: groupData, isFetching: groupFetching , isError} = useQuery<IGroups[]>({
         queryKey: ['groups'],
         queryFn: (): Promise<IGroups[]> => GroupStore.getGroups(),
-        retry: 1
     });
+
+    useEffect(() => {
+        if (isError) {
+            ErrorToast("Xodimlar topilmadi");
+        }
+    }, [isError]);
 
     // const {data: oneGroup} = useMutation<IGroups>({
     //     mutationKey: ['oneGroup'],
@@ -383,7 +390,7 @@ export const Guruhlar = observer(() => {
                         <Table<IGroups>
                             id="GroupTable"
                             columns={columns}
-                            dataSource={groupSuccess ? groupData : []}
+                            dataSource={groupData}
                             loading={groupFetching}
                             size="large"
                             locale={{

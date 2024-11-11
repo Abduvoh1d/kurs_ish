@@ -15,7 +15,7 @@ class Room {
     }
 
     async createRooms(data: IRooms): Promise<void> {
-        await api.post('room/create' , data)
+        await api.post('room/create/' , data)
     }
 }
 

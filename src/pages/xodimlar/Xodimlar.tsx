@@ -9,6 +9,11 @@ import {HiOutlineDotsVertical} from "react-icons/hi";
 import dayjs from "dayjs";
 import {LuPencil} from "react-icons/lu";
 import {IoIosCheckmark, IoMdClose} from "react-icons/io";
+import {useQuery} from "@tanstack/react-query";
+import UserStore from "../../store/Users.ts";
+import {IUsers} from "../../types";
+import {ErrorToast} from "../../components/toastify/Toastify.tsx";
+import {useEffect} from "react";
 
 export const Xodimlar = () => {
     const {t} = useTranslation();
@@ -16,6 +21,17 @@ export const Xodimlar = () => {
     const [profileForm] = useForm();
     const {push} = useRouterPush();
     const {query} = useLocationParams();
+
+    const {data: Xodimlar , isFetching , isError} = useQuery({
+        queryKey: ['xodimlar'],
+        queryFn: (): Promise<IUsers[]> => UserStore.getUsers()
+    })
+
+    useEffect(() => {
+        if (isError) {
+            ErrorToast("Xodimlar topilmadi");
+        }
+    }, [isError]);
 
     const onFinish: FormProps['onFinish'] = (values) => {
         if (values.dataOfBirth) {
@@ -71,14 +87,19 @@ export const Xodimlar = () => {
             key: 'id',
         },
         {
-            title: t('FIO'),
-            dataIndex: 'fullName',
-            key: 'fullName',
+            title: t('Ism'),
+            dataIndex: 'first_name',
+            key: 'first_name',
+        },
+        {
+            title: t('Familiya'),
+            dataIndex: 'last_name',
+            key: 'last_name',
         },
         {
             title: t('Phone'),
-            dataIndex: 'phone',
-            key: 'phone',
+            dataIndex: 'phone_number',
+            key: 'phone_number',
         },
         {
             title: t("Rol"),
@@ -166,12 +187,6 @@ export const Xodimlar = () => {
         {key: '3', name: 'Python', day: true},
         {key: '4', name: 'Python', day: false},
     ]
-
-    const data = [
-        {key: '1', id: 1, fullName: 'John Doe', phone: '+998 90 123 45 67', role: 'Mathematics Teacher'},
-        {key: '2', id: 2, fullName: 'Jane Smith', phone: '+998 91 987 65 43', role: 'Physics Teacher'},
-        {key: '3', id: 3, fullName: 'Dr. Albert', phone: '+998 93 345 67 89', role: 'Chemistry Teacher'},
-    ];
 
     const formData: IForm[] = [
         {label: t('Familiya'), name: 'surname', size: 'large', span: 24, required: true},
@@ -281,7 +296,8 @@ export const Xodimlar = () => {
                         <Table
                             id="GroupTable"
                             columns={columns}
-                            dataSource={data}
+                            dataSource={Xodimlar}
+                            loading={isFetching}
                             size="large"
                             locale={{
                                 emptyText: <Empty description={<span>{t("Malumot topilmadi")}</span>}/>,
@@ -522,7 +538,7 @@ export const Xodimlar = () => {
                                         size="large"
                                         locale={{
                                             emptyText: <Empty description={<span>{t("Malumot topilmadi")}</span>}/>,
-                                        }}></Table>
+                                        }}/>
                                 </div>
                             </Col>
                         </Row>

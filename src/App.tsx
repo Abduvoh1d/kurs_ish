@@ -22,6 +22,7 @@ import {Xonalar} from "./pages/xonalar/Xonalar.tsx";
 import {Moliya} from "./pages/moliya/Moliya.tsx";
 import {Sozlamalar} from "./pages/sozlamalar/Sozlamalar.tsx";
 import {Layout} from "./pages/Layout.tsx";
+import {ToastConfig} from "./components/toastify/Toastify.tsx";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -101,6 +102,7 @@ function App() {
         >
             <QueryClientProvider client={queryClient}>
                 <ReactQueryDevtools initialIsOpen={false}/>
+                <ToastConfig />
                 <RouterProvider router={router}/>
             </QueryClientProvider>
         </ConfigProvider>
