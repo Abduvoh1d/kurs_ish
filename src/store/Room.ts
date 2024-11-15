@@ -17,6 +17,10 @@ class Room {
     async createRooms(data: IRooms): Promise<void> {
         await api.post('room/create/' , data)
     }
+
+    async deleteRooms(id: number): Promise<void> {
+        await api.delete(`room/delete/${id}/`)
+    }
 }
 
 const RoomStore = new Room()

@@ -9,11 +9,12 @@ import {HiOutlineDotsVertical} from "react-icons/hi";
 import dayjs from "dayjs";
 import {LuPencil} from "react-icons/lu";
 import {IoIosCheckmark, IoMdClose} from "react-icons/io";
-import {useQuery} from "@tanstack/react-query";
-import UserStore from "../../store/Users.ts";
-import {IUsers} from "../../types";
-import {ErrorToast} from "../../components/toastify/Toastify.tsx";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+import UserStore from "../../store/Xodimlar.ts";
+import {IXodim} from "../../types";
+import {ErrorToast, SuccessToast} from "../../components/toastify/Toastify.tsx";
 import {useEffect} from "react";
+import {ColumnType} from "antd/es/table";
 
 export const Xodimlar = () => {
     const {t} = useTranslation();
@@ -21,10 +22,35 @@ export const Xodimlar = () => {
     const [profileForm] = useForm();
     const {push} = useRouterPush();
     const {query} = useLocationParams();
+    const queryClient = useQueryClient()
 
-    const {data: Xodimlar , isFetching , isError} = useQuery({
+    const {data: Xodimlar, isFetching, isError} = useQuery({
         queryKey: ['xodimlar'],
-        queryFn: (): Promise<IUsers[]> => UserStore.getUsers()
+        queryFn: (): Promise<IXodim[]> => UserStore.getEmployee()
+    })
+
+    const createEmployes = useMutation({
+        mutationKey: ['createEmployes'],
+        mutationFn: (data: IXodim) => UserStore.createEmployee(data),
+        onSuccess: () => {
+            queryClient.invalidateQueries(['xodimlar']);
+            SuccessToast('Xodim qo\'shildi');
+        },
+        onError: () => {
+            ErrorToast('Xodim qo\'shib bo\'lmadi');
+        }
+    })
+
+    const deleteEmployes = useMutation({
+        mutationKey: ['deleteEmployes'],
+        mutationFn: (id: number) => UserStore.deleteEmployee(id),
+        onSuccess: () => {
+            queryClient.invalidateQueries(['xodimlar']);
+            SuccessToast('Xodim o\'chirildi');
+        },
+        onError: () => {
+            ErrorToast('Xodim o\'chirib bo\'lmadi');
+        }
     })
 
     useEffect(() => {
@@ -34,10 +60,8 @@ export const Xodimlar = () => {
     }, [isError]);
 
     const onFinish: FormProps['onFinish'] = (values) => {
-        if (values.dataOfBirth) {
-            values.dataOfBirth = dayjs(values.dataOfBirth).format("DD/MM/YYYY");
-        }
-        console.log(values);
+        values.date_of_birth = dayjs(values.date_of_birth).format("YYYY-MM-DD");
+        createEmployes.mutate(values);
         onClose();
     };
 
@@ -70,9 +94,9 @@ export const Xodimlar = () => {
     };
 
     const segmentOptions = [
-        {label: t('Faol'), value: t('Faol')},
+        {label: t('Admin'), value: t('Admin')},
         {label: t('Ustozlar'), value: t('Ustozlar')},
-        {label: t('Boshqa xodimlar'), value: t('Boshqa xodimlar')},
+        {label: t('Xodimlar'), value: t('Xodimlar')},
     ];
 
     const editeSegmentOptions = [
@@ -80,7 +104,7 @@ export const Xodimlar = () => {
         {label: t('Hikoya'), value: t('Hikoya')},
     ];
 
-    const columns = [
+    const columns: ColumnType<IXodim>[] = [
         {
             title: 'ID',
             dataIndex: 'id',
@@ -110,16 +134,17 @@ export const Xodimlar = () => {
             title: t('Hodisa'),
             key: 'days',
             dataIndex: '.',
-            render: (_: unknown, item: unknown) => (
+            render: (_: unknown, item: IXodim) => (
                 <Dropdown menu={{
                     items: [
                         {
                             key: '1',
                             label: (
-                                <p className="cursor-pointer text-[16px]" onClick={() => onePerson(item)}>
+                                <p className="cursor-pointer text-[16px]">
                                     {t("O'zgartirish")}
                                 </p>
                             ),
+                            onClick: () => onePerson(item)
                         },
                         {
                             key: '2',
@@ -128,6 +153,7 @@ export const Xodimlar = () => {
                                     {t("O'chirish")}
                                 </p>
                             ),
+                            onClick: () => deleteEmployes.mutate(item.id)
                         },
                     ]
                 }} trigger={['click']} placement="bottomRight">
@@ -189,10 +215,9 @@ export const Xodimlar = () => {
     ]
 
     const formData: IForm[] = [
-        {label: t('Familiya'), name: 'surname', size: 'large', span: 24, required: true},
-        {label: t("Ism"), name: 'name', size: 'large', span: 24, required: true},
-        {label: t("Telefon raqam"), name: 'days', size: 'large', span: 24, required: true},
-        {label: t("Parol"), name: 'password', type: 'password', size: 'large', span: 24, required: true},
+        {label: t("Ism"), name: 'first_name', size: 'large', span: 24, required: true},
+        {label: t('Familiya'), name: 'last_name', size: 'large', span: 24, required: true},
+        {label: t("Telefon raqam"), name: 'phone_number', size: 'large', span: 24, required: true},
         {
             label: t("Rol"),
             name: 'role',
@@ -200,16 +225,17 @@ export const Xodimlar = () => {
             size: 'large',
             span: 24,
             option: [
-                {label: t('Admin'), value: t('Admin')},
-                {label: t('Ustoz'), value: t('Ustoz')},
-                {label: t('O\'quvchi'), value: t('O\'quvchi')},
+                {label: t('O\'quvchi'), value: t('student')},
+                {label: t('Ustoz'), value: t('teacher')},
+                {label: t('Moderator'), value: t('moderator')},
+                {label: t('Admin'), value: t('admin')},
             ],
             className: 'w-full',
             required: true,
         },
         {
             label: t("Tug'ilgan kuni"),
-            name: 'dataOfBirth',
+            name: 'date_of_birth',
             type: 'datePicker',
             size: 'large',
             span: 12,
@@ -221,8 +247,8 @@ export const Xodimlar = () => {
             name: 'gender',
             type: 'radio',
             radioOptions: [
-                {label: t('Erkak'), value: t('Erkak')},
-                {label: t('Ayol'), value: t('Ayol')},
+                {label: t('Erkak'), value: t('male')},
+                {label: t('Ayol'), value: t('female')},
             ],
             size: 'large',
             span: 12,
@@ -293,7 +319,7 @@ export const Xodimlar = () => {
                         </div>
                     </div>
                     <div className="mt-10">
-                        <Table
+                        <Table<IXodim>
                             id="GroupTable"
                             columns={columns}
                             dataSource={Xodimlar}

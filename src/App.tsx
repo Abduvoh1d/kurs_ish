@@ -40,9 +40,6 @@ const queryClient = new QueryClient({
             // Ma'lumotni komponentda oldindan yuklash va ekran yangilanishida ishlatish imkoniyati
             cacheTime: 1000 * 60 * 10, // 10 daqiqa davomida keshda qoladi
 
-            // Avtomatik so'rovni amalga oshirmaslik va faqat "enabled" parametri orqali qo'lda boshqarish
-            enabled: true,
-
             // `useErrorBoundary` bilan ishlatish uchun xatoliklarni to'liq ko'rsatish
             // useErrorBoundary: true,
         },

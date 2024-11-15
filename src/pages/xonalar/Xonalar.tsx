@@ -11,22 +11,21 @@ import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import RoomStore from "../../store/Room.ts";
 import {useEffect} from "react";
 import {ErrorToast, SuccessToast} from "../../components/toastify/Toastify.tsx";
+import Excel from "../../components/Excel.tsx";
 
 export function Xonalar() {
     const {t} = useTranslation()
     const [form] = useForm()
     const {push} = useRouterPush();
     const {query} = useLocationParams();
-
     const queryClient = useQueryClient();
-
 
     const {data: Rooms, isFetching , isError} = useQuery({
         queryKey: ['rooms'],
         queryFn:(): Promise<IRooms[]> => RoomStore.getRooms()
     })
 
-    const mutation = useMutation({
+    const createRoom = useMutation({
         mutationKey: ['addRoom'],
         mutationFn: (values: IRooms) => RoomStore.createRooms(values),
         onSuccess: () => {
@@ -38,6 +37,18 @@ export function Xonalar() {
         }
     })
 
+    const deleteRoom = useMutation({
+        mutationKey: ['deleteRoom'],
+        mutationFn: (id: number) => RoomStore.deleteRooms(id),
+        onSuccess: () => {
+            queryClient.invalidateQueries(['rooms']);
+            SuccessToast("Xona o'chirildi");
+        },
+        onError: () => {
+            ErrorToast("Xona o'chirib bo'lmadi");
+        }
+    })
+
     useEffect(() => {
         if (isError) {
             ErrorToast("Xodimlar topilmadi");
@@ -45,8 +56,7 @@ export function Xonalar() {
     }, [isError]);
 
     const onFinish: FormProps['onFinish'] = (values: IRooms) => {
-        console.log(values);
-        mutation.mutate(values)
+        createRoom.mutate(values)
         onClose()
     };
 
@@ -69,14 +79,16 @@ export function Xonalar() {
         },
         {
             label: t("Xona sig’imi"),
-            size: 'large',
+            type: 'number',
             name: 'room_capacity',
+            size: 'large',
             required: true,
             span: 24,
             className: 'w-full',
         },
         {
             label: t("Parta va stullar soni"),
+            type: 'number',
             name: 'number_of_desks_and_chairs',
             size: 'large',
             required: true,
@@ -92,17 +104,17 @@ export function Xonalar() {
             key: 'id',
         },
         {
-            title: t('FIO'),
+            title: t('Xonani nomi'),
             dataIndex: 'name',
             key: 'name',
         },
         {
-            title: t('Telefon raqam'),
+            title: t('Xona sig’imi'),
             dataIndex: 'room_capacity',
             key: 'room_capacity',
         },
         {
-            title: t("Groups"),
+            title: t("Parta va stullar soni"),
             dataIndex: 'number_of_desks_and_chairs',
             key: 'number_of_desks_and_chairs',
         },
@@ -110,7 +122,7 @@ export function Xonalar() {
             title: t('Hodisa'),
             key: 'action',
             dataIndex: '.',
-            render: () => {
+            render: (_: unknown, item: IRooms) => {
                 return (
                     <Dropdown menu={{items: [
                             {
@@ -128,6 +140,7 @@ export function Xonalar() {
                                         {t("O'chirish")}
                                     </p>
                                 ),
+                                onClick: () => deleteRoom.mutate(item.id)
                             },
                         ]}} trigger={['click']} placement="bottomRight">
                         <HiOutlineDotsVertical className="cursor-pointer"/>
@@ -153,8 +166,11 @@ export function Xonalar() {
                         {t("Yangisini qo'shing")}
                     </Button>
                 </div>
-
+                <div className={'mt-3'}>
+                    <Excel name={'rooms'}/>
+                </div>
                 <Table<IRooms>
+                    id={'rooms'}
                     columns={columns}
                     dataSource={Rooms}
                     className={'mt-10'}

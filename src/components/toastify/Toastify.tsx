@@ -29,7 +29,7 @@ export const ErrorToast = (message: string) => {
 
 export const InfoToast = (message: string) => {
     toast.info(message, {
-        position: "bottom-left",
+        position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,

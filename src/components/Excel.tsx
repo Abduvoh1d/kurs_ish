@@ -12,7 +12,7 @@ interface ExcelProps {
 
 function Excel({
                    disable,
-                   className = 'p-3 border-2 rounded border-gray-300 mb-4',
+                   className = 'p-3 border-2 rounded border-gray-300 mb-4 me-4',
                    iconClassName = 'text-gray-500 text-lg',
                    name
                }: ExcelProps) {
@@ -32,7 +32,7 @@ function Excel({
 
 
     return (
-        <div>
+        <div className={'w-[100%] flex justify-end items-center'}>
             <button disabled={disable} onClick={handleExport} className={className}>
                 <RiFileExcel2Line className={iconClassName}/>
             </button>

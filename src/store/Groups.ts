@@ -10,7 +10,6 @@ class Groups {
 
     async getGroups(): Promise<IGroups[]> {
         const response: AxiosResponse<IGroups[]> = await api.get('group/list')
-        console.log(response.data)
         return response.data
     }
 
@@ -19,8 +18,8 @@ class Groups {
         return response.data
     }
 
-    async createGroup(data: Omit<IGroups, 'id'>): Promise<void> {
-        await api.post('group/create' , data)
+    async createGroup(data: IGroups): Promise<void> {
+        await api.post('group/create/' , data)
     }
 
     async updateGroup(data: IGroups): Promise<void>{
@@ -28,7 +27,7 @@ class Groups {
     }
 
     async deleteGroup(id: number): Promise<void>{
-        await api.delete(`group/delete/${id}`)
+        await api.delete(`group/delete/${id}/`)
     }
 }
 

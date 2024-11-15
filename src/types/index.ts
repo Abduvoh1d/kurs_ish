@@ -6,25 +6,25 @@ export interface IGroups {
     day: string
 }
 
-export interface IUsers {
+export interface IXodim {
     id: number,
     first_name: string,
     last_name: string,
     phone_number: string,
-    role: string
-}
-
-export interface IUserCreate {
-    first_name: string,
-    last_name: string,
-    phone_number: string,
-    role: 'admin' | 'teacher',
+    role: 'admin' | 'teacher' | 'student' | 'moderator',
     date_of_birth: string,
     gender: 'male' | 'female',
-    photo: string
+}
+
+export interface IStudent {
+    id: number,
+    first_name: string,
+    last_name: string,
+    phone_number: string
 }
 
 export interface IRooms {
+    id: number,
     name: string,
     room_capacity: string,
     number_of_desks_and_chairs: string

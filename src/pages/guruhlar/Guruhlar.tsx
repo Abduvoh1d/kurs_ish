@@ -9,13 +9,16 @@ import {useTranslation} from "react-i18next";
 import {FaRegTrashAlt} from "react-icons/fa";
 import {FiPlus} from "react-icons/fi";
 import {Empty} from 'antd';
-import {useQuery} from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import GroupStore from "../../store/Groups.ts";
-import {IGroups} from "../../types";
+import {IGroups, IRooms} from "../../types";
 import {observer} from "mobx-react-lite";
 import {AutoDrower} from "../../components/auto-drower";
 import {useEffect} from "react";
-import {ErrorToast} from "../../components/toastify/Toastify.tsx";
+import {ErrorToast, SuccessToast} from "../../components/toastify/Toastify.tsx";
+import Excel from "../../components/Excel.tsx";
+import dayjs from "dayjs";
+import RoomStore from "../../store/Room.ts";
 
 export const Guruhlar = observer(() => {
     const [form] = useForm()
@@ -23,10 +26,53 @@ export const Guruhlar = observer(() => {
     const {query} = useLocationParams();
     const {t} = useTranslation();
 
-    const {data: groupData, isFetching: groupFetching , isError} = useQuery<IGroups[]>({
+    const queryClient = useQueryClient()
+
+    const {data: groupData, isFetching: groupFetching, isError} = useQuery<IGroups[]>({
         queryKey: ['groups'],
         queryFn: (): Promise<IGroups[]> => GroupStore.getGroups(),
     });
+
+    const {data: roomData, isFetching: roomFetching} = useQuery<IRooms[]>({
+        queryKey: ['rooms'],
+        queryFn: (): Promise<IRooms[]> => RoomStore.getRooms(),
+        enabled: Boolean(query.add) || Boolean(query.edite)
+    });
+
+    const getOneGroup = useMutation({
+        mutationFn: (id: number) => GroupStore.getOneGroup(id),
+        onSuccess: (data) => {
+            form.setFieldsValue(data)
+        },
+        onError: () => {
+            ErrorToast('Gruppa o\'chirib bo\'lmadi');
+        }
+    })
+
+    const createGroup = useMutation({
+        mutationKey: ['createGroup'],
+        mutationFn: (data: IGroups) => GroupStore.createGroup(data),
+        onSuccess: () => {
+            SuccessToast('Gruppa qo\'shildi');
+            queryClient.invalidateQueries(['groups']);
+
+        },
+        onError: () => {
+            ErrorToast('Gruppa qo\'shib bo\'lmadi');
+        }
+    })
+
+    const deleteGroup = useMutation({
+        mutationKey: ['deleteGroup'],
+        mutationFn: (id: number) => GroupStore.deleteGroup(id),
+        onSuccess: () => {
+            SuccessToast('Gruppa o\'chirildi');
+            queryClient.invalidateQueries(['groups']);
+        },
+        onError: () => {
+            ErrorToast('Gruppa o\'chirib bo\'lmadi');
+        }
+    })
 
     useEffect(() => {
         if (isError) {
@@ -34,33 +80,12 @@ export const Guruhlar = observer(() => {
         }
     }, [isError]);
 
-    // const {data: oneGroup} = useMutation<IGroups>({
-    //     mutationKey: ['oneGroup'],
-    //     mutationFn: (): Promise<IGroups> => GroupStore.getOneGroup(Number(query.getOneGroup))
-    // })
-    //
-    // const {data: createGroup} = useMutation({
-    //     mutationKey: ['createGroup'],
-    //     mutationFn: () => GroupStore.createGroup()
-    // })
-    //
-    // const {data: updateGroup} = useMutation({
-    //     mutationKey: ['updateGroup'],
-    //     mutationFn: () => GroupStore.updateGroup()
-    // })
-    //
-    // const {data: deleteGroup} = useMutation({
-    //     mutationKey: ['deleteGroup'],
-    //     mutationFn: () => GroupStore.deleteGroup()
-    // })
-
     const onFinish: FormProps['onFinish'] = (values: IGroups) => {
-        console.log(values);
         if (Number(query.getOneGroup)) {
             console.log('update')
-        }
-        {
-            console.log('add')
+        } else {
+            values.course_start_time = dayjs(values.course_start_time).format('HH:mm:ss')
+            createGroup.mutate(values)
         }
         onClose()
     };
@@ -79,6 +104,7 @@ export const Guruhlar = observer(() => {
     }
 
     function edite(id: number) {
+        getOneGroup.mutate(id)
         push({query: {...query, edite: true, id}})
     }
 
@@ -104,11 +130,6 @@ export const Guruhlar = observer(() => {
             key: 'teacher',
         },
         {
-            title: t("O'quvchi raqam"),
-            dataIndex: 'teacher',
-            key: 'teacher',
-        },
-        {
             title: t('Vaqt'),
             dataIndex: 'course_start_time',
             key: 'course_start_time',
@@ -129,10 +150,11 @@ export const Guruhlar = observer(() => {
                             {
                                 key: '1',
                                 label: (
-                                    <p className="cursor-pointer text-[16px]" onClick={() => edite(item.id)}>
+                                    <p className="cursor-pointer text-[16px]">
                                         {t("O'zgartirish")}
                                     </p>
                                 ),
+                                onClick: () => edite(item.id)
                             },
                             {
                                 key: '2',
@@ -141,6 +163,7 @@ export const Guruhlar = observer(() => {
                                         {t("O'chirish")}
                                     </p>
                                 ),
+                                onClick: () => deleteGroup.mutate(item.id)
                             },
                         ]
                     }} trigger={['click']} placement="bottomRight">
@@ -218,9 +241,7 @@ export const Guruhlar = observer(() => {
             name: 'teacher',
             required: true,
             option: [
-                {label: "Tech1", value: 1},
-                {label: "Tech2", value: 1},
-                {label: "Tech3", value: 1},
+                {label: "Tech1", value: 14},
             ]
         },
         {
@@ -228,16 +249,12 @@ export const Guruhlar = observer(() => {
             span: 24,
             size: 'large',
             type: 'select',
-            name: 'days',
+            name: 'day',
             required: true,
             option: [
-                {label: t("Dushanba"), value: t("Dushanba")},
-                {label: t("Seshanba"), value: t("Seshanba")},
-                {label: t("Chorshanba"), value: t("Chorshanba")},
-                {label: t("Payshanba"), value: t("Payshanba")},
-                {label: t("Juma"), value: t("Juma")},
-                {label: t("Shanba"), value: t("Shanba")},
-                {label: t("Yakshanba"), value: t("Yakshanba")},
+                {label: t("Har kun"), value: t("har kun")},
+                {label: t("Juft kun"), value: t("juft kun")},
+                {label: t("Toq kun"), value: t("toq kun")},
             ]
         },
         {
@@ -247,27 +264,20 @@ export const Guruhlar = observer(() => {
             type: 'select',
             name: 'room',
             required: true,
-            option: [
-                {label: "Room1", value: "room1"},
-            ]
-        },
-        {
-            label: t("Kun"),
-            size: 'large',
-            type: 'datePicker',
-            name: 'date',
-            required: true,
-            className: 'w-full',
+            option: roomData && !roomFetching
+                ? roomData.map((item) => ({ label: item.name, value: item.id }))
+                : [],
         },
         {
             label: t("Vaqt"),
             size: 'large',
             type: 'timePicker',
-            name: 'time',
+            name: 'course_start_time',
             required: true,
             className: 'w-full',
         }
     ]
+
 
     return (
         <div className="w-full bg-[#F9F9F9] h-full overflow-auto">
@@ -340,7 +350,7 @@ export const Guruhlar = observer(() => {
 
                             </div>
                         </Col>
-                        <Col span={15} className={' max-h-auto'}>
+                        <Col span={15} className={'max-h-auto'}>
                             <Table
                                 columns={storyTable}
                                 dataSource={storyData}
@@ -387,6 +397,7 @@ export const Guruhlar = observer(() => {
                     </div>
 
                     <div className="mt-10">
+                        <Excel name={'GroupTable'}/>
                         <Table<IGroups>
                             id="GroupTable"
                             columns={columns}

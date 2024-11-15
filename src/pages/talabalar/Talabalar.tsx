@@ -6,15 +6,69 @@ import useForm from "antd/es/form/hooks/useForm";
 import {useRouterPush} from "../../hooks/use-router-push.ts";
 import {useLocationParams} from "../../hooks/use-location-params.ts";
 import {HiOutlineDotsVertical} from "react-icons/hi";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+import StudentStore from "../../store/Student.ts";
+import {IStudent} from "../../types";
+import Excel from "../../components/Excel.tsx";
+import {ColumnType} from "antd/es/table";
+import {ErrorToast, SuccessToast} from "../../components/toastify/Toastify.tsx";
+import dayjs from "dayjs";
+import {useEffect} from "react";
 
 export function Talabalar() {
     const {t} = useTranslation()
     const [form] = useForm()
     const {push} = useRouterPush();
     const {query} = useLocationParams();
+    const queryClient = useQueryClient()
+
+    const {data: Students, isFetching, isError} = useQuery({
+        queryKey: ['student'],
+        queryFn: (): Promise<IStudent[]> => StudentStore.getStudent(),
+        retry: 1
+    })
+
+    const getOneStudent = useMutation({
+        mutationFn: (id: number) => StudentStore.getOneStudent(id),
+        onSuccess: (data) => {
+            form.setFieldsValue(data)
+        },
+        onError: (error) => {
+            ErrorToast(`${error}`)
+        }
+    })
+
+    const createStudent = useMutation({
+        mutationFn: (data: IStudent) => StudentStore.createStudent(data),
+        onSuccess: () => {
+            SuccessToast("Talaba qo'shildi")
+            queryClient.invalidateQueries({queryKey: ['student']})
+        },
+        onError: () => {
+            ErrorToast("Talaba qo'shilmadi")
+        }
+    })
+
+    const deleteStudent = useMutation({
+        mutationFn: (id: number) => StudentStore.deleteStudent(id),
+        onSuccess: () => {
+            SuccessToast("Talaba o'chirildi")
+            queryClient.invalidateQueries({queryKey: ['student']})
+        },
+        onError: (error) => {
+            ErrorToast(`${error}`)
+        }
+    })
+
+    useEffect(() => {
+        if (isError) {
+            ErrorToast('Error')
+        }
+    }, [isError]);
 
     const onFinish: FormProps['onFinish'] = (values) => {
-        console.log(values);
+        values.date_of_birth = dayjs(values.date_of_birth.$d).format('YYYY-MM-DD')
+        createStudent.mutate(values)
         onClose()
     };
 
@@ -33,53 +87,51 @@ export function Talabalar() {
 
     function onClose() {
         form.resetFields();
-        push({query: {...query, add: undefined, edite: undefined , id: undefined}})
+        push({query: {...query, add: undefined, edite: undefined, id: undefined}})
     }
 
     function edite(id: number) {
-        push({query: {...query, edite: true , id}})
+        getOneStudent.mutate(id)
+        push({query: {...query, edite: true, id}})
     }
 
-    const columns = [
+    const columns: ColumnType<IStudent>[] = [
         {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
         },
         {
-            title: t('FIO'),
-            dataIndex: 'fullName',
-            key: 'fullName',
+            title: t('Ism'),
+            dataIndex: 'first_name',
+            key: 'first_name',
         },
         {
-            title: t('Telefon raqam'),
-            dataIndex: 'phone',
-            key: 'phone',
+            title: t('Familiya'),
+            dataIndex: 'last_name',
+            key: 'last_name',
         },
         {
-            title: t("Groups"),
-            dataIndex: 'group',
-            key: 'group',
-        },
-        {
-            title: t('Rol'),
-            dataIndex: 'role',
-            key: 'role',
+            title: t("Telefon raqam"),
+            dataIndex: 'phone_number',
+            key: 'phone_number',
         },
         {
             title: t('Hodisa'),
             key: 'days',
             dataIndex: '.',
-            render: (_: unknown , item: unknown) => {
+            render: (_: unknown, item: IStudent) => {
                 return (
-                    <Dropdown menu={{items: [
+                    <Dropdown menu={{
+                        items: [
                             {
                                 key: '1',
                                 label: (
-                                    <p className="cursor-pointer text-[16px]" onClick={() => edite(Number((item as { id: number }).id))}>
+                                    <p className="cursor-pointer text-[16px]">
                                         {t("O'zgartirish")}
                                     </p>
                                 ),
+                                onClick: () => edite(item.id)
                             },
                             {
                                 key: '2',
@@ -88,8 +140,12 @@ export function Talabalar() {
                                         {t("O'chirish")}
                                     </p>
                                 ),
+                                onClick: () => {
+                                    deleteStudent.mutate(item.id)
+                                }
                             },
-                        ]}} trigger={['click']} placement="bottomRight">
+                        ]
+                    }} trigger={['click']} placement="bottomRight">
                         <HiOutlineDotsVertical className="cursor-pointer"/>
                     </Dropdown>
                 );
@@ -97,54 +153,26 @@ export function Talabalar() {
         }
     ];
 
-    const data = [
-        {
-            key: '1',
-            id: 1,
-            fullName: 'John Doe',
-            phone: '+998901234567',
-            group: 'Mathematics Group A',
-            role: 'Admin',
-        },
-        {
-            key: '2',
-            id: 2,
-            fullName: 'Jane Smith',
-            phone: '+998909876543',
-            group: 'Physics Group B',
-            role: 'Ustoz',
-        },
-        {
-            key: '3',
-            id: 3,
-            fullName: 'Dr. Albert',
-            phone: '+998907654321',
-            group: 'Chemistry Group C',
-            role: 'O\'quvchi',
-        },
-    ];
-
-
     const formData = [
-        {
-            label: t('Familiya'),
-            name: 'surname',
-            size: 'large',
-            span: 24,
-            required: true,
-        },
         {
             label: t("Ism"),
             span: 24,
             size: 'large',
-            name: 'name',
+            name: 'first_name',
+            required: true,
+        },
+        {
+            label: t('Familiya'),
+            name: 'last_name',
+            size: 'large',
+            span: 24,
             required: true,
         },
         {
             label: t("Telefon raqam"),
             span: 24,
             size: 'large',
-            name: 'days',
+            name: 'phone_number',
             required: true,
         },
         {
@@ -159,7 +187,7 @@ export function Talabalar() {
             label: t("Tug'ilgan kuni"),
             size: 'large',
             type: 'datePicker',
-            name: 'dataOfBirth',
+            name: 'date_of_birth',
             required: true,
             className: 'w-full',
             span: 12,
@@ -169,8 +197,8 @@ export function Talabalar() {
             size: 'large',
             type: 'radio',
             radioOptions: [
-                {label: t('Erkak'), value: t('Erkak')},
-                {label: t('Ayol'), value: t('Ayol')}
+                {label: t('Erkak'), value: t('male')},
+                {label: t('Ayol'), value: t('female')}
             ],
             name: 'gender',
             required: true,
@@ -204,7 +232,9 @@ export function Talabalar() {
             </div>
 
             <div className={'mt-10'}>
-                <Table id={'GroupTable'} columns={columns} dataSource={data} size="large" locale={{
+                <Excel name={'GroupTable'}/>
+                <Table<IStudent> id={'GroupTable'} columns={columns} dataSource={Students} loading={isFetching}
+                                 size="large" locale={{
                     emptyText: (
                         <Empty
                             description={<span>{t("Malumot topilmadi")}</span>}
@@ -214,7 +244,7 @@ export function Talabalar() {
             </div>
 
             <Drawer
-                title={t(query.add ? "Yangi talaba qo’shish" : "Talabani o'zgartish")}
+                title={t(query.add ? "Yangi talaba qo'shish" : "Talabani o'zgartish")}
                 onClose={onClose}
                 open={Boolean(query.add) || Boolean(query.edite)}
                 width={530}
