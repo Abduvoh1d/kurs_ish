@@ -1,5 +1,5 @@
-import {ToastContainer, toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 export const SuccessToast = (message: string) => {
     toast.success(message, {
@@ -11,8 +11,8 @@ export const SuccessToast = (message: string) => {
         draggable: true,
         progress: undefined,
         theme: "colored",
-    });
-};
+    })
+}
 
 export const ErrorToast = (message: string) => {
     toast.error(message, {
@@ -24,8 +24,8 @@ export const ErrorToast = (message: string) => {
         draggable: true,
         progress: undefined,
         theme: "colored",
-    });
-};
+    })
+}
 
 export const InfoToast = (message: string) => {
     toast.info(message, {
@@ -37,7 +37,7 @@ export const InfoToast = (message: string) => {
         draggable: true,
         progress: undefined,
         theme: "light",
-    });
-};
+    })
+}
 
-export const ToastConfig = () => <ToastContainer/>;
+export const ToastConfig = () => <ToastContainer />

@@ -1,7 +1,7 @@
-import {makeAutoObservable} from "mobx";
-import api from "../api";
-import {IStudent} from "../types";
-import {AxiosResponse} from "axios";
+import { makeAutoObservable } from "mobx"
+import api from "../api"
+import { IStudent } from "../types"
+import { AxiosResponse } from "axios"
 
 class Student {
     constructor() {
@@ -9,17 +9,17 @@ class Student {
     }
 
     async getStudent(): Promise<IStudent[]> {
-        const response: AxiosResponse<IStudent[]> = await api('student/list')
+        const response: AxiosResponse<IStudent[]> = await api.get("student/list")
         return response.data
     }
 
     async getOneStudent(id: number): Promise<IStudent> {
-        const response: AxiosResponse<IStudent> = await api(`student/detail/${id}`)
+        const response: AxiosResponse<IStudent> = await api.get(`student/detail/${id}`)
         return response.data
     }
 
     async createStudent(data: IStudent) {
-        await api.post('student/create/', data)
+        await api.post("student/create/", data)
     }
 
     async deleteStudent(id: number) {

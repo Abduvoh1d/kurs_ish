@@ -1,8 +1,9 @@
-import {Empty} from "antd";
+import { Empty } from "antd"
 
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}",], theme: {
+    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    theme: {
         extend: {
             colors: {
                 "purple-900": "#7338AC",
@@ -12,7 +13,8 @@ export default {
                 "blue-600": "#635AD9",
                 "green-600": "#90C049",
                 "red-500": "#ED4337",
-            }
+            },
         },
-    }, plugins: [],
+    },
+    plugins: [],
 }

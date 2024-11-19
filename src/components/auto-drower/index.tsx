@@ -1,5 +1,5 @@
-import {ReactNode} from "react";
-import {Drawer} from "antd";
+import { ReactNode } from "react"
+import { Drawer } from "antd"
 
 interface DrowerProps {
     children?: ReactNode
@@ -9,14 +9,9 @@ interface DrowerProps {
     onClose?: () => void
 }
 
-export function AutoDrower ({children , title , onClose , open , width}: DrowerProps) {
+export function AutoDrower({ children, title, onClose, open, width }: DrowerProps) {
     return (
-        <Drawer
-            title={title}
-            onClose={onClose}
-            open={open}
-            width={width}
-        >
+        <Drawer title={title} onClose={onClose} open={open} width={width}>
             {children}
         </Drawer>
     )
