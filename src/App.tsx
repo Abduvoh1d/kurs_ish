@@ -42,61 +42,21 @@ const queryClient = new QueryClient({
     },
 })
 
-const allowedLanguages = ["uz", "ru"]
-
 function App() {
     const { i18n } = useTranslation()
 
     const router = createBrowserRouter([
         {
-            path: "/",
-            element: <Layout />,
+            path: `${i18n.language}`,
+            element: <Layout/>,
             children: [
-                {
-                    path: "/",
-                    element: <Navigate to={`/${i18n.language}/${PagesConfig.Dashboard}`} replace />,
-                },
-                {
-                    path: `${PagesConfig.Dashboard}`,
-                    element: <Navigate to={`/${i18n.language}/${PagesConfig.Dashboard}`} replace />,
-                },
-                {
-                    path: `${PagesConfig.Guruhlar}`,
-                    element: <Navigate to={`/${i18n.language}/${PagesConfig.Guruhlar}`} replace />,
-                },
-                {
-                    path: `${PagesConfig.Talabalar}`,
-                    element: <Navigate to={`/${i18n.language}/${PagesConfig.Talabalar}`} replace />,
-                },
-                {
-                    path: `${PagesConfig.Xodimlar}`,
-                    element: <Navigate to={`/${i18n.language}/${PagesConfig.Xodimlar}`} replace />,
-                },
-                {
-                    path: `${PagesConfig.Xonalar}`,
-                    element: <Navigate to={`/${i18n.language}/${PagesConfig.Xonalar}`} replace />,
-                },
-                {
-                    path: `${PagesConfig.Moliya}`,
-                    element: <Navigate to={`/${i18n.language}/${PagesConfig.Moliya}`} replace />,
-                },
-                {
-                    path: `${PagesConfig.Sozlamalar}`,
-                    element: <Navigate to={`/${i18n.language}/${PagesConfig.Sozlamalar}`} replace />,
-                },
-                {
-                    path: `${i18n.language}`,
-                    element: <CheckLanguage />,
-                    children: [
-                        { path: `${PagesConfig.Dashboard}`, element: <Dashboard /> },
-                        { path: `${PagesConfig.Guruhlar}`, element: <Guruhlar /> },
-                        { path: `${PagesConfig.Talabalar}`, element: <Talabalar /> },
-                        { path: `${PagesConfig.Xodimlar}`, element: <Xodimlar /> },
-                        { path: `${PagesConfig.Xonalar}`, element: <Xonalar /> },
-                        { path: `${PagesConfig.Moliya}`, element: <Moliya /> },
-                        { path: `${PagesConfig.Sozlamalar}`, element: <Sozlamalar /> },
-                    ],
-                },
+                { path: `${PagesConfig.Dashboard}`, element: <Dashboard /> },
+                { path: `${PagesConfig.Guruhlar}`, element: <Guruhlar /> },
+                { path: `${PagesConfig.Talabalar}`, element: <Talabalar /> },
+                { path: `${PagesConfig.Xodimlar}`, element: <Xodimlar /> },
+                { path: `${PagesConfig.Xonalar}`, element: <Xonalar /> },
+                { path: `${PagesConfig.Moliya}`, element: <Moliya /> },
+                { path: `${PagesConfig.Sozlamalar}`, element: <Sozlamalar /> },
             ],
         },
         { path: `${PagesConfig.Login}`, element: <Login /> },
@@ -113,21 +73,11 @@ function App() {
         >
             <QueryClientProvider client={queryClient}>
                 <ReactQueryDevtools initialIsOpen={false} />
-                <ToastConfig />
                 <RouterProvider router={router} />
+                <ToastConfig />
             </QueryClientProvider>
         </ConfigProvider>
     )
-}
-
-function CheckLanguage() {
-    const { i18n } = useTranslation()
-
-    if (!allowedLanguages.includes(i18n.language)) {
-        return <Navigate to="*" />
-    }
-
-    return <Outlet />
 }
 
 export default App

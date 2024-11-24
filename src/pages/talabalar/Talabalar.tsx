@@ -94,9 +94,16 @@ export function Talabalar() {
 
     const columns: ColumnType<IStudent>[] = [
         {
-            title: "ID",
-            dataIndex: "id",
-            key: "id",
+            title: t("Rasm"),
+            dataIndex: "photo",
+            key: "photo",
+            render: (_, item: IStudent) => (
+                <img
+                    src={item.photo || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
+                    alt=""
+                    className="w-[50px] h-[50px] rounded-full"
+                />
+            ),
         },
         {
             title: t("Ism"),
@@ -112,6 +119,16 @@ export function Talabalar() {
             title: t("Telefon raqam"),
             dataIndex: "phone_number",
             key: "phone_number",
+        },
+        {
+            title: t("Tug'ilgan kuni"),
+            dataIndex: "date_of_birth",
+            key: "date_of_birth",
+        },
+        {
+            title: t("Gender"),
+            dataIndex: "gender",
+            key: "gender",
         },
         {
             title: t("Hodisa"),
@@ -166,7 +183,6 @@ export function Talabalar() {
             name: "photo",
             size: "large",
             span: 24,
-            required: true,
         },
         {
             label: t("Telefon raqam"),
@@ -175,7 +191,7 @@ export function Talabalar() {
             name: "phone_number",
             required: true,
         },
-        {
+        !query.edite && {
             label: t("Parol"),
             span: 24,
             size: "large",
@@ -216,7 +232,11 @@ export function Talabalar() {
 
                 <div className={"flex items-center gap-1"}>
                     <Excel name={"GroupTable"} />
-                    <Button onClick={openModal} type={"primary"} className={"h-[100%] text-[16px] rounded-xl flex items-center justify-center pb-2"}>
+                    <Button
+                        onClick={openModal}
+                        type={"primary"}
+                        className={"h-[100%] text-[16px] rounded-xl flex items-center justify-center pb-2"}
+                    >
                         <span className={"mt-1"}>
                             <FiPlus />
                         </span>
@@ -238,7 +258,12 @@ export function Talabalar() {
                 />
             </div>
 
-            <Drawer title={t(query.add ? "Yangi talaba qo'shish" : "Talabani o'zgartish")} onClose={onClose} open={Boolean(query.add) || Boolean(query.edite)} width={530}>
+            <Drawer
+                title={t(query.add ? "Yangi talaba qo'shish" : "Talabani o'zgartish")}
+                onClose={onClose}
+                open={Boolean(query.add) || Boolean(query.edite)}
+                width={530}
+            >
                 <AutoForm props={formData} form={form} layout="vertical" onFinish={onFinish} />
                 <div className={"flex items-center justify-end gap-3"}>
                     <Button onClick={onClose}>{t("Bekor qilish")}</Button>

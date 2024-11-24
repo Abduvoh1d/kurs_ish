@@ -10,7 +10,6 @@ class Xodimlar {
 
     async getEmployee(role?: string): Promise<IXodim[]> {
         const response: AxiosResponse<IXodim[]> = await api.get(role ? `worker/list/?role=${role}` : "worker/list")
-        console.log(response.data)
         return response.data
     }
 

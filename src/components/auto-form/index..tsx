@@ -1,4 +1,20 @@
-import { Checkbox, CheckboxOptionType, Col, ColorPicker, DatePicker, Form, FormInstance, Input, InputNumber, Radio, Row, Select, SelectProps, TimePicker, Upload } from "antd"
+import {
+    Checkbox,
+    CheckboxOptionType,
+    Col,
+    ColorPicker,
+    DatePicker,
+    Form,
+    FormInstance,
+    Input,
+    InputNumber,
+    Radio,
+    Row,
+    Select,
+    SelectProps,
+    TimePicker,
+    Upload,
+} from "antd"
 import { useTranslation } from "react-i18next"
 import i18n from "i18next"
 
@@ -24,7 +40,22 @@ export interface IForm {
     radioOptions?: CheckboxOptionType[]
     size?: "small" | "middle" | "large"
     variant?: "filled" | "borderless" | "outlined"
-    type?: "input" | "textarea" | "password" | "checkbox" | "email" | "datePicker" | "rangePicker" | "number" | "timePicker" | "radio" | "upload" | "url" | "select" | "phone" | "colorPicker"
+    type?:
+        | "input"
+        | "textarea"
+        | "password"
+        | "checkbox"
+        | "email"
+        | "datePicker"
+        | "rangePicker"
+        | "number"
+        | "timePicker"
+        | "radio"
+        | "upload"
+        | "url"
+        | "select"
+        | "phone"
+        | "colorPicker"
 }
 
 export interface AutoFormProps {
@@ -37,7 +68,15 @@ export interface AutoFormProps {
     onFinish?: (values: unknown) => void
 }
 
-export function AutoForm({ props, layout = "vertical", gutter = [20, 0], form, className, initialValues, onFinish }: AutoFormProps) {
+export function AutoForm({
+    props,
+    layout = "vertical",
+    gutter = [20, 0],
+    form,
+    className,
+    initialValues,
+    onFinish,
+}: AutoFormProps) {
     const { t } = useTranslation()
 
     function getInput(props: IForm) {
@@ -94,9 +133,18 @@ export function AutoForm({ props, layout = "vertical", gutter = [20, 0], form, c
         <Form form={form} layout={layout} className={className} initialValues={initialValues} onFinish={onFinish}>
             <Row gutter={gutter}>
                 {props?.map((item, index) => (
-                    <Col span={item.span ?? 12} key={index} xs={item.xs} sm={item.sm} md={item.md} lg={item.lg} xl={item.xl} xxl={item.xxl}>
+                    <Col
+                        span={item.span ?? 12}
+                        key={index}
+                        xs={item.xs}
+                        sm={item.sm}
+                        md={item.md}
+                        lg={item.lg}
+                        xl={item.xl}
+                        xxl={item.xxl}
+                    >
                         <Form.Item
-                            label={item.type === "checkbox" ? undefined : item.label}
+                            label={item.label}
                             name={item.name}
                             valuePropName={item.type === "checkbox" ? "checked" : "value"}
                             rules={[

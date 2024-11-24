@@ -1,22 +1,20 @@
 import { AutoForm, IForm } from "../../components/auto-form/index..tsx"
 import useForm from "antd/es/form/hooks/useForm"
 import { Button, FormProps } from "antd"
-import { Link } from "react-router-dom"
-import Pages from "../../config/pages.config.ts"
 
 export function Login() {
     const [form] = useForm()
 
     const props: IForm[] = [
         {
-            label: "Email",
-            name: "email",
+            label: "Telefon number",
+            name: "phone_number",
             size: "large",
             required: true,
             span: 24,
         },
         {
-            label: "Password",
+            label: "Parol",
             name: "password",
             size: "large",
             required: true,
@@ -30,7 +28,7 @@ export function Login() {
 
     return (
         <div
-            className="h-[100vh] w-[100%] flex items-center justify-center main-bg"
+            className="h-[100vh] w-[100%] p-5 flex items-center justify-center main-bg"
             style={{
                 backgroundImage: "url('/loginImage.webp')",
                 backgroundSize: "cover",
@@ -44,13 +42,6 @@ export function Login() {
                 <Button type={"primary"} className={"w-[100%]"} size={"large"} onClick={() => form.submit()}>
                     Submit
                 </Button>
-
-                <p className={"text-center mt-10"}>
-                    You do not have account{" "}
-                    <Link to={`/${Pages.Register}`} className={"text-green-500 ml-1"}>
-                        Sign in
-                    </Link>
-                </p>
             </div>
         </div>
     )

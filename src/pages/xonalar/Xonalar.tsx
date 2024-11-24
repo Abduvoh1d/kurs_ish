@@ -51,7 +51,7 @@ export function Xonalar() {
     })
 
     const updateRoom = useMutation({
-        mutationFn: ({ id, values }: { id: number, values: IRooms }) => RoomStore.updateRooms(id, values),
+        mutationFn: ({ id, values }: { id: number; values: IRooms }) => RoomStore.updateRooms(id, values),
         onSuccess: () => {
             queryClient.invalidateQueries(["rooms"])
             SuccessToast("Xona yangilandi")
@@ -193,11 +193,14 @@ export function Xonalar() {
                     </Typography.Title>
                     <div className={"flex items-center gap-2"}>
                         <Excel name={"rooms"} />
-                        <Button onClick={openModal} type="primary"
-                                className="h-full text-[16px] rounded-xl flex items-center justify-center pb-2">
-                        <span className="mt-1">
-                            <FiPlus />
-                        </span>
+                        <Button
+                            onClick={openModal}
+                            type="primary"
+                            className="h-full text-[16px] rounded-xl flex items-center justify-center pb-2"
+                        >
+                            <span className="mt-1">
+                                <FiPlus />
+                            </span>
                             {t("Yangisini qo'shing")}
                         </Button>
                     </div>
@@ -215,9 +218,12 @@ export function Xonalar() {
                 />
             </div>
 
-            <Drawer title={query.add ? t("Yangi xona qo'shish") : t("Xonani o'zgartirish")} onClose={onClose}
-                    open={Boolean(query.add) || Boolean(query.edite)}
-                    width={530}>
+            <Drawer
+                title={query.add ? t("Yangi xona qo'shish") : t("Xonani o'zgartirish")}
+                onClose={onClose}
+                open={Boolean(query.add) || Boolean(query.edite)}
+                width={530}
+            >
                 <AutoForm props={formData} form={form} layout="vertical" onFinish={onFinish} />
                 <div className="flex items-center justify-end gap-3">
                     <Button onClick={onClose}>{t("Bekor qilish")}</Button>

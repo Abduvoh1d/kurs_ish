@@ -30,7 +30,10 @@ export const useRouterPush = () => {
     }, [])
 
     const push = useCallback(
-        ({ url, query = {} }: { url?: string; query?: Record<string, any> }, options?: { update?: boolean; replace?: boolean }) => {
+        (
+            { url, query = {} }: { url?: string; query?: Record<string, any> },
+            options?: { update?: boolean; replace?: boolean }
+        ) => {
             const update = get(options, "update", false)
             const replace = get(options, "replace", false)
 

@@ -189,7 +189,11 @@ export function Moliya() {
                 <Typography.Title level={1} className="!font-semibold !mb-2">
                     {t("Moliya")}
                 </Typography.Title>
-                <Button onClick={openModal} type="primary" className="h-[100%] text-[16px] rounded-xl flex items-center justify-center pb-2">
+                <Button
+                    onClick={openModal}
+                    type="primary"
+                    className="h-[100%] text-[16px] rounded-xl flex items-center justify-center pb-2"
+                >
                     <FiPlus className="mt-1" />
                     {t("Yangisini qo'shing")}
                 </Button>
@@ -220,7 +224,12 @@ export function Moliya() {
                 />
             </div>
 
-            <Drawer title={t("Yangi guruh qo’shish")} onClose={onClose} open={Boolean(query.add) || Boolean(query.edite)} width={530}>
+            <Drawer
+                title={t("Yangi guruh qo’shish")}
+                onClose={onClose}
+                open={Boolean(query.add) || Boolean(query.edite)}
+                width={530}
+            >
                 <AutoForm props={formData} form={form} layout="vertical" onFinish={onFinish} />
                 <div className="flex items-center justify-end gap-3">
                     <Button onClick={onClose}>{t("Bekor qilish")}</Button>

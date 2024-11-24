@@ -110,9 +110,16 @@ export const Xodimlar = () => {
 
     const columns: ColumnType<IXodim>[] = [
         {
-            title: "ID",
-            dataIndex: "id",
-            key: "id",
+            title: t("Rasm"),
+            dataIndex: "photo",
+            key: "photo",
+            render: (_, item: IXodim) => (
+                <img
+                    src={item.photo || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
+                    alt=""
+                    className="w-[50px] h-[50px] rounded-full"
+                />
+            ),
         },
         {
             title: t("Ism"),
@@ -128,6 +135,11 @@ export const Xodimlar = () => {
             title: t("Phone"),
             dataIndex: "phone_number",
             key: "phone_number",
+        },
+        {
+            title: t("Gender"),
+            dataIndex: "gender",
+            key: "gender",
         },
         {
             title: t("Rol"),
@@ -174,8 +186,16 @@ export const Xodimlar = () => {
             dataIndex: "day",
             key: "22-yan",
             render: (day: boolean) => (
-                <div className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? "bg-gray-500" : day ? "bg-green-500" : "bg-red-500"}`}>
-                    {day == null ? <></> : day ? <IoIosCheckmark className={"text-white text-[26px]"} /> : <IoMdClose className={"text-white text-[18px]"} />}
+                <div
+                    className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? "bg-gray-500" : day ? "bg-green-500" : "bg-red-500"}`}
+                >
+                    {day == null ? (
+                        <></>
+                    ) : day ? (
+                        <IoIosCheckmark className={"text-white text-[26px]"} />
+                    ) : (
+                        <IoMdClose className={"text-white text-[18px]"} />
+                    )}
                 </div>
             ),
         },
@@ -184,8 +204,16 @@ export const Xodimlar = () => {
             dataIndex: "day",
             key: "23-yan",
             render: (day: boolean) => (
-                <div className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? "bg-gray-500" : day ? "bg-green-500" : "bg-red-500"}`}>
-                    {day == null ? <></> : day ? <IoIosCheckmark className={"text-white text-[26px]"} /> : <IoMdClose className={"text-white text-[18px]"} />}
+                <div
+                    className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? "bg-gray-500" : day ? "bg-green-500" : "bg-red-500"}`}
+                >
+                    {day == null ? (
+                        <></>
+                    ) : day ? (
+                        <IoIosCheckmark className={"text-white text-[26px]"} />
+                    ) : (
+                        <IoMdClose className={"text-white text-[18px]"} />
+                    )}
                 </div>
             ),
         },
@@ -194,8 +222,16 @@ export const Xodimlar = () => {
             dataIndex: "day",
             key: "24-yan",
             render: (day: boolean) => (
-                <div className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? "bg-gray-500" : day ? "bg-green-500" : "bg-red-500"}`}>
-                    {day == null ? <></> : day ? <IoIosCheckmark className={"text-white text-[26px]"} /> : <IoMdClose className={"text-white text-[18px]"} />}
+                <div
+                    className={`w-[40px] h-[40px] flex items-center justify-center rounded-full ${day == null ? "bg-gray-500" : day ? "bg-green-500" : "bg-red-500"}`}
+                >
+                    {day == null ? (
+                        <></>
+                    ) : day ? (
+                        <IoIosCheckmark className={"text-white text-[26px]"} />
+                    ) : (
+                        <IoMdClose className={"text-white text-[18px]"} />
+                    )}
                 </div>
             ),
         },
@@ -219,6 +255,13 @@ export const Xodimlar = () => {
         {
             label: t("Familiya"),
             name: "last_name",
+            size: "large",
+            span: 24,
+            required: true,
+        },
+        {
+            label: t("Rasm") + " Url",
+            name: "photo",
             size: "large",
             span: 24,
             required: true,
@@ -317,8 +360,19 @@ export const Xodimlar = () => {
                             {t("Xodimlar")}
                         </Typography.Title>
                         <div className="flex items-center gap-3">
-                            <Segmented options={segmentOptions} value={query.sort as string} onChange={handleSegmentChange} className="w-[400px] shadow-md" size="large" block />
-                            <Button onClick={openModal} type="primary" className="h-full text-[16px] rounded-xl flex items-center justify-center pb-2">
+                            <Segmented
+                                options={segmentOptions}
+                                value={query.sort as string}
+                                onChange={handleSegmentChange}
+                                className="w-[400px] shadow-md"
+                                size="large"
+                                block
+                            />
+                            <Button
+                                onClick={openModal}
+                                type="primary"
+                                className="h-full text-[16px] rounded-xl flex items-center justify-center pb-2"
+                            >
                                 <FiPlus className="mt-1" />
                                 {t("Yangisini qo'shing")}
                             </Button>
@@ -357,7 +411,14 @@ export const Xodimlar = () => {
                             <p className={"text-[16px] mt-1 text-gray-400 underline"}>{t("Xodim profilida")}</p>
                         </div>
 
-                        <Segmented options={editeSegmentOptions} value={query.sort as string} onChange={handleSegmentChange} className="w-[200px] shadow-md" size="large" block />
+                        <Segmented
+                            options={editeSegmentOptions}
+                            value={query.sort as string}
+                            onChange={handleSegmentChange}
+                            className="w-[200px] shadow-md"
+                            size="large"
+                            block
+                        />
 
                         <div></div>
                     </div>
@@ -398,7 +459,11 @@ export const Xodimlar = () => {
                                         >
                                             {t("Bekor qilish")}
                                         </Button>
-                                        <Button type={"primary"} className={"px-4 py-4 text-[14px]"} onClick={() => profileForm.submit()}>
+                                        <Button
+                                            type={"primary"}
+                                            className={"px-4 py-4 text-[14px]"}
+                                            onClick={() => profileForm.submit()}
+                                        >
                                             {t("O'zgartirish")}
                                         </Button>
                                     </div>
@@ -409,9 +474,17 @@ export const Xodimlar = () => {
 
                                 <Row className={"mb-5 mt-2"}>
                                     <Col span={12} className={"px-2 mb-2"}>
-                                        <div className={"bg-white shadow-md flex items-center justify-evenly py-3 px-3"}>
+                                        <div
+                                            className={"bg-white shadow-md flex items-center justify-evenly py-3 px-3"}
+                                        >
                                             <div className={"flex items-center w-[100%]  gap-3"}>
-                                                <div className={"bg-blue-600 px-5 py-1 text-white rounded-md text-[10px]"}>РУССГР1</div>
+                                                <div
+                                                    className={
+                                                        "bg-blue-600 px-5 py-1 text-white rounded-md text-[10px]"
+                                                    }
+                                                >
+                                                    РУССГР1
+                                                </div>
                                                 <p className={"text-[12px] font-[500]"}>Python</p>
                                             </div>
 
@@ -422,9 +495,17 @@ export const Xodimlar = () => {
                                         </div>
                                     </Col>
                                     <Col span={12} className={"px-2 mb-2"}>
-                                        <div className={"bg-white shadow-md flex items-center justify-evenly py-3 px-3"}>
+                                        <div
+                                            className={"bg-white shadow-md flex items-center justify-evenly py-3 px-3"}
+                                        >
                                             <div className={"flex items-center w-[100%]  gap-3"}>
-                                                <div className={"bg-blue-600 px-5 py-1 text-white rounded-md text-[10px]"}>РУССГР1</div>
+                                                <div
+                                                    className={
+                                                        "bg-blue-600 px-5 py-1 text-white rounded-md text-[10px]"
+                                                    }
+                                                >
+                                                    РУССГР1
+                                                </div>
                                                 <p className={"text-[12px] font-[500]"}>Python</p>
                                             </div>
 
@@ -439,7 +520,11 @@ export const Xodimlar = () => {
                                 <div>
                                     <p className={"text-[20px] font-[600]"}>{t("Payments")}</p>
 
-                                    <div className={"h-[82vh] w-[100%] overflow-y-auto mt-5 bg-white flex flex-col gap-8"}>
+                                    <div
+                                        className={
+                                            "h-[82vh] w-[100%] overflow-y-auto mt-5 bg-white flex flex-col gap-8"
+                                        }
+                                    >
                                         <div className={"flex items-center bg-[#F7F7F7] p-5 shadow-lg"}>
                                             <p className={"text-[14px] font-[500] w-[50%]"}>Date of payment</p>
                                             <p>23.02.2023</p>
@@ -481,7 +566,9 @@ export const Xodimlar = () => {
 
                                         <div className={"flex items-center bg-[#F7F7F7] px-5 py-4 shadow-lg"}>
                                             <p className={"text-[14px] font-[500] w-[50%]"}>Return</p>
-                                            <button className={" bg-[#E70C0C] text-white px-4 py-1 rounded-md"}>Return</button>
+                                            <button className={" bg-[#E70C0C] text-white px-4 py-1 rounded-md"}>
+                                                Return
+                                            </button>
                                         </div>
 
                                         <div className={"flex items-center bg-[#F7F7F7] p-5 shadow-lg"}>
@@ -548,7 +635,9 @@ export const Xodimlar = () => {
                                             dataSource={storyData}
                                             size="large"
                                             locale={{
-                                                emptyText: <Empty description={<span>{t("Malumot topilmadi")}</span>} />,
+                                                emptyText: (
+                                                    <Empty description={<span>{t("Malumot topilmadi")}</span>} />
+                                                ),
                                             }}
                                         />
                                     </div>

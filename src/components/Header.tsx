@@ -35,7 +35,11 @@ export function Header() {
             </div>
 
             <div className="flex items-center gap-[20px] mr-[80px]">
-                <input type="email" placeholder={`${t("Qidiruv")}`} className="border-2 rounded-3xl px-[10px] py-[10px] pl-[20px] w-[400px]" />
+                <input
+                    type="email"
+                    placeholder={`${t("Qidiruv")}`}
+                    className="border-2 rounded-3xl px-[10px] py-[10px] pl-[20px] w-[400px]"
+                />
                 <Button.Group size="large">
                     {language.map((item, index) => (
                         <Button

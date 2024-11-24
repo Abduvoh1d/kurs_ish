@@ -18,37 +18,37 @@ export function Sider() {
         {
             name: t("Dashboard"),
             icon: <RiDashboardLine />,
-            link: `/${Pages.Dashboard}`,
+            link: `${Pages.Dashboard}`,
         },
         {
             name: t("Guruhlar"),
             icon: <FaUsers />,
-            link: `/${Pages.Guruhlar}`,
+            link: `${Pages.Guruhlar}`,
         },
         {
             name: t("Xodimlar"),
             icon: <FaUserTie />,
-            link: `/${Pages.Xodimlar}`,
+            link: `${Pages.Xodimlar}`,
         },
         {
             name: t("Xonalar"),
             icon: <TfiBlackboard />,
-            link: `/${Pages.Xonalar}`,
+            link: `${Pages.Xonalar}`,
         },
         {
             name: t("Talabalar"),
             icon: <FaBookReader />,
-            link: `/${Pages.Talabalar}`,
+            link: `${Pages.Talabalar}`,
         },
         {
             name: t("Moliya"),
             icon: <IoMdWallet />,
-            link: `/${Pages.Moliya}`,
+            link: `${Pages.Moliya}`,
         },
         {
             name: t("Sozlamalar"),
             icon: <IoMdSettings />,
-            link: `/${Pages.Sozlamalar}`,
+            link: `${Pages.Sozlamalar}`,
         },
     ]
 
