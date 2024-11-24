@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Navigate, Outlet } from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { ConfigProvider } from "antd"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { useTranslation } from "react-i18next"
@@ -48,7 +48,7 @@ function App() {
     const router = createBrowserRouter([
         {
             path: `${i18n.language}`,
-            element: <Layout/>,
+            element: <Layout />,
             children: [
                 { path: `${PagesConfig.Dashboard}`, element: <Dashboard /> },
                 { path: `${PagesConfig.Guruhlar}`, element: <Guruhlar /> },
